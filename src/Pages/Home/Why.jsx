@@ -1,0 +1,128 @@
+import React from 'react';
+import Container from '../../Layout/Container/Container';
+import { FiZap, FiAward, FiTool, FiFeather, FiSun, FiCpu } from 'react-icons/fi';
+
+const featuresData = [
+  {
+    id: 1,
+    title: 'দ্রুত চার্জিং',
+    description: 'মাত্র ২ ঘণ্টায় ফুল চার্জ',
+    icon: <FiZap />,
+    colorClasses: {
+      bg: 'bg-amber-50/40',
+      border: 'border-amber-100',
+      text: 'text-amber-700',
+      iconBg: 'bg-amber-100/60',
+      hover: 'hover:bg-amber-50 hover:border-amber-300 hover:shadow-amber-100/50 hover:-translate-y-1'
+    }
+  },
+  {
+    id: 2,
+    title: 'দীর্ঘস্থায়ী পারফরম্যান্স',
+    description: '১০ বছর+ স্থিতিশীল ব্যাকআপ',
+    icon: <FiAward />,
+    colorClasses: {
+      bg: 'bg-emerald-50/40',
+      border: 'border-emerald-100',
+      text: 'text-emerald-700',
+      iconBg: 'bg-emerald-100/60',
+      hover: 'hover:bg-emerald-50 hover:border-emerald-300 hover:shadow-emerald-100/50 hover:-translate-y-1'
+    }
+  },
+  {
+    id: 3,
+    title: 'কম Maintenance',
+    description: 'Zero water topup, no acid',
+    icon: <FiTool />,
+    colorClasses: {
+      bg: 'bg-sky-50/40',
+      border: 'border-sky-100',
+      text: 'text-sky-700',
+      iconBg: 'bg-sky-100/60',
+      hover: 'hover:bg-sky-50 hover:border-sky-300 hover:shadow-sky-100/50 hover:-translate-y-1'
+    }
+  },
+  {
+    id: 4,
+    title: 'Lightweight Design',
+    description: '৭০% হালকা ও compact',
+    icon: <FiFeather />,
+    colorClasses: {
+      bg: 'bg-purple-50/40',
+      border: 'border-purple-100',
+      text: 'text-purple-700',
+      iconBg: 'bg-purple-100/60',
+      hover: 'hover:bg-purple-50 hover:border-purple-300 hover:shadow-purple-100/50 hover:-translate-y-1'
+    }
+  },
+  {
+    id: 5,
+    title: 'Solar Friendly',
+    description: 'সোলার এর সাথে perfect match',
+    icon: <FiSun />,
+    colorClasses: {
+      bg: 'bg-rose-50/40',
+      border: 'border-rose-100',
+      text: 'text-rose-700',
+      iconBg: 'bg-rose-100/60',
+      hover: 'hover:bg-rose-50 hover:border-rose-300 hover:shadow-rose-100/50 hover:-translate-y-1'
+    }
+  },
+  {
+    id: 6,
+    title: 'Energy Efficient',
+    description: '৯৮% efficiency rate',
+    icon: <FiCpu />,
+    colorClasses: {
+      bg: 'bg-indigo-50/40',
+      border: 'border-indigo-100',
+      text: 'text-indigo-700',
+      iconBg: 'bg-indigo-100/60',
+      hover: 'hover:bg-indigo-50 hover:border-indigo-300 hover:shadow-indigo-100/50 hover:-translate-y-1'
+    }
+  }
+];
+
+function Why() {
+  return (
+    <section className="py-16 bg-white">
+      <Container>
+        
+        {/* Section Heading */}
+        <h2 className="text-[#1a1a1a] font-extrabold text-2xl md:text-3xl text-center font-sans mb-12">
+          কেন Lithium Battery সেরা পছন্দ?
+        </h2>
+
+        {/* 6-Card Responsive Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+          {featuresData.map((item) => (
+            <div
+              key={item.id}
+              className={`w-full max-w-[360px] p-8 rounded-[20px] border text-center transition-all duration-300 cursor-pointer shadow-sm ${item.colorClasses.bg} ${item.colorClasses.border} ${item.colorClasses.hover}`}
+            >
+              
+              {/* Icon Container */}
+              <div className={`w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl ${item.colorClasses.iconBg} ${item.colorClasses.text}`}>
+                {item.icon}
+              </div>
+
+              {/* Title */}
+              <h3 className="text-[#1a1a1a] font-bold text-lg mb-2">
+                {item.title}
+              </h3>
+
+              {/* Description */}
+              <p className="text-slate-500 text-sm font-medium">
+                {item.description}
+              </p>
+
+            </div>
+          ))}
+        </div>
+
+      </Container>
+    </section>
+  );
+}
+
+export default Why;
