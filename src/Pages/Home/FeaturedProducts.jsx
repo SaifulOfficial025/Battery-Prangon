@@ -6,9 +6,9 @@ const productsData = [
   {
     id: 1,
     title: "12V 100Ah Lithium Battery",
-    description: "IPS, Solar ও Home Backup এর জন্য ideal solution",
-    price: "৳৩২,৫০০",
-    originalPrice: "৳৩২,৫০০",
+    description: "Ideal solution for IPS, Solar and Home Backup",
+    price: "৳32,500",
+    originalPrice: "৳32,500",
     image: "/dummyproductimage.png",
     hasDiscount: true,
     discountText: "20% off"
@@ -16,45 +16,45 @@ const productsData = [
   {
     id: 2,
     title: "12V 100Ah Lithium Battery",
-    description: "IPS, Solar ও Home Backup এর জন্য ideal solution",
-    price: "৳৩২,৫০০",
-    originalPrice: "৳৩২,৫০০",
+    description: "Ideal solution for IPS, Solar and Home Backup",
+    price: "৳32,500",
+    originalPrice: "৳32,500",
     image: "/dummyproductimage.png",
     hasDiscount: false
   },
   {
     id: 3,
     title: "12V 100Ah Lithium Battery",
-    description: "IPS, Solar ও Home Backup এর জন্য ideal solution",
-    price: "৳৩২,৫০০",
-    originalPrice: "৳৩২,৫০০",
+    description: "Ideal solution for IPS, Solar and Home Backup",
+    price: "৳32,500",
+    originalPrice: "৳32,500",
     image: "/dummyproductimage.png",
     hasDiscount: false
   },
   {
     id: 4,
     title: "12V 100Ah Lithium Battery",
-    description: "IPS, Solar ও Home Backup এর জন্য ideal solution",
-    price: "৳৩২,৫০০",
-    originalPrice: "৳৩২,৫০০",
+    description: "Ideal solution for IPS, Solar and Home Backup",
+    price: "৳32,500",
+    originalPrice: "৳32,500",
     image: "/dummyproductimage.png",
     hasDiscount: false
   },
   {
     id: 5,
     title: "12V 100Ah Lithium Battery",
-    description: "IPS, Solar ও Home Backup এর জন্য ideal solution",
-    price: "৳৩২,৫০০",
-    originalPrice: "৳৩২,৫০০",
+    description: "Ideal solution for IPS, Solar and Home Backup",
+    price: "৳32,500",
+    originalPrice: "৳32,500",
     image: "/dummyproductimage.png",
     hasDiscount: false
   },
   {
     id: 6,
     title: "12V 100Ah Lithium Battery",
-    description: "IPS, Solar ও Home Backup এর জন্য ideal solution",
-    price: "৳৩২,৫০০",
-    originalPrice: "৳৩২,৫০০",
+    description: "Ideal solution for IPS, Solar and Home Backup",
+    price: "৳32,500",
+    originalPrice: "৳32,500",
     image: "/dummyproductimage.png",
     hasDiscount: false
   }
@@ -62,13 +62,13 @@ const productsData = [
 
 function FeaturedProducts() {
   return (
-    <section className="py-12 bg-white">
+    <section className=" bg-white">
       <Container>
         
         {/* Header Section */}
         <div className="flex items-end justify-between mb-8 border-b border-gray-100 pb-4">
           <h2 className="text-[#1a1a1a] font-extrabold text-2xl md:text-3xl font-sans">
-            জনপ্রিয় ব্যাটারি কালেকশন
+            Popular Battery Collection
           </h2>
           <a 
             href="#all-products" 

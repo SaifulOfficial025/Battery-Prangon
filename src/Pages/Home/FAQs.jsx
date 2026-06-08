@@ -5,28 +5,28 @@ import { FiChevronUp, FiChevronDown } from 'react-icons/fi';
 const faqsData = [
   {
     id: 1,
-    question: 'Lithium battery কত বছর চলে?',
-    answer: 'সঠিক ব্যবহারে আমাদের lithium battery ১০-১২ বছর পর্যন্ত স্থিতিশীল পারফরম্যান্স দেয় এবং ৩০০০+ charge cycle সাপোর্ট করে।'
+    question: 'How many years does a Lithium battery last?',
+    answer: 'With proper usage, our lithium battery provides stable performance for 10-12 years and supports 3000+ charge cycles.'
   },
   {
     id: 2,
-    question: 'IPS এর সাথে ব্যবহার করা যাবে?',
-    answer: 'হ্যাঁ, আমাদের লিথিয়াম ব্যাটারিগুলো বাজারের যেকোনো আধুনিক আইপিএস (IPS) এবং ইউপিএস (UPS) সিস্টেমের সাথে সম্পূর্ণ সামঞ্জস্যপূর্ণ।'
+    question: 'Can it be used with an IPS?',
+    answer: 'Yes, our lithium batteries are fully compatible with any modern IPS and UPS systems on the market.'
   },
   {
     id: 3,
-    question: 'Solar compatible কি?',
-    answer: 'হ্যাঁ, সোলার চার্জ কন্ট্রোলার বা হাইব্রিড ইনভার্টারের মাধ্যমে এটি সোলার সিস্টেমের সাথে চমৎকারভাবে কাজ করে এবং দ্রুত চার্জিং নিশ্চিত করে।'
+    question: 'Is it Solar compatible?',
+    answer: 'Yes, it works excellently with solar systems through a solar charge controller or hybrid inverter and ensures fast charging.'
   },
   {
     id: 4,
-    question: 'Delivery কত দিনে?',
-    answer: 'আমরা সাধারণত ঢাকা সিটির ভেতর ২৪ থেকে ৪৮ ঘণ্টার মধ্যে এবং ঢাকার বাইরে ৩ থেকে ৫ কার্যদিবসের মধ্যে দ্রুত ও নিরাপদ হোম ডেলিভারি নিশ্চিত করি।'
+    question: 'How many days for Delivery?',
+    answer: 'We typically ensure fast and safe home delivery within 24-48 hours inside Dhaka city and 3-5 working days outside Dhaka.'
   },
   {
     id: 5,
-    question: 'Warranty কিভাবে কাজ করে?',
-    answer: 'প্রতিটি ব্যাটারির সাথে আমরা ১০ বছরের অফিসিয়াল রিপ্লেসমেন্ট ওয়ারেন্টি প্রদান করি। যেকোনো ধরনের উৎপাদনজনিত ত্রুটির জন্য আমাদের কাস্টমার কেয়ারে যোগাযোগ করলে দ্রুত সমাধান পেয়ে যাবেন।'
+    question: 'How does the Warranty work?',
+    answer: 'We provide a 10-year official replacement warranty with every battery. Contact our customer care for any manufacturing defects for a quick resolution.'
   }
 ];
 
@@ -39,12 +39,12 @@ function FAQs() {
   };
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-8 bg-white">
       <Container>
         
         {/* Section Heading */}
         <h2 className="text-[#1a1a1a] font-extrabold text-2xl md:text-3xl text-center font-sans mb-12">
-          প্রশ্ন ও উত্তর
+          Questions & Answers
         </h2>
 
         {/* Accordion List Wrapper */}

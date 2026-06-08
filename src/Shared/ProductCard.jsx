@@ -10,7 +10,7 @@ const ProductCard = ({
   onSeeProduct,
 }) => {
   return (
-    <div className="bg-white rounded-[24px] border border-gray-100 shadow-sm overflow-hidden flex flex-col max-w-[320px] w-full">
+    <div className="bg-white  border border-gray-100 shadow-sm overflow-hidden flex flex-col max-w-[320px] w-full">
       
       {/* Product Image Section */}
       <div className="bg-[#f5f5f5] p-6 flex items-center justify-center aspect-square relative">

@@ -8,42 +8,42 @@ const testimonialsData = [
     name: 'Rahim Uddin',
     location: 'Khulna',
     avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&h=120&q=80',
-    text: '"দুই বছর ধরে ব্যবহার করছি, Backup performance অসাধারণ"'
+    text: '"Been using for two years, Backup performance is extraordinary"'
   },
   {
     id: 2,
     name: 'Selina Akter',
     location: 'Sylhet',
     avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&h=120&q=80',
-    text: '"Solar এর সাথে দারুণ কাজ করছে, বিদ্যুৎ বিল কমে গেছে"'
+    text: '"Working great with Solar, electricity bills have reduced"'
   },
   {
     id: 3,
     name: 'Mohammad Faisal',
     location: 'Chittagong',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80',
-    text: '"ব্যবহারের পর থেকে আমাদের অফিসের কাজের গতি বাড়িয়েছে"'
+    text: '"Increased our office work speed since usage"'
   },
   {
     id: 4,
     name: 'Anisur Rahman',
     location: 'Dhaka',
     avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=120&h=120&q=80',
-    text: '"আমাদের কারখানায় আইপিএস ব্যাকআপের জন্য সেরা ব্যাটারি সলিউশন"'
+    text: '"Best battery solution for IPS backup in our factory"'
   },
   {
     id: 5,
     name: 'Farhana Islam',
     location: 'Rajshahi',
     avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120&q=80',
-    text: '"কোনো মেইনটেন্যান্সের ঝামেলা নেই, চার্জও খুব দ্রুত সম্পন্ন হয়"'
+    text: '"No maintenance hassle, charging completes very fast"'
   },
   {
     id: 6,
     name: 'Kamrul Hasan',
     location: 'Barisal',
     avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&h=120&q=80',
-    text: '"পাওয়ার লোডের সময় স্থিতিশীল ভোল্টেজ প্রদান করে, আমি খুবই সন্তুষ্ট"'
+    text: '"Provides stable voltage during power load, I am very satisfied"'
   }
 ];
 
@@ -83,12 +83,12 @@ function Testimonials() {
   }, [maxIndex]);
 
   return (
-    <section className="py-16 bg-white overflow-hidden">
+    <section className="py-8 bg-white overflow-hidden">
       <Container>
         
         {/* Title */}
         <h2 className="text-[#1a1a1a] font-extrabold text-2xl md:text-3xl text-center font-sans mb-12">
-          গ্রাহকদের অভিজ্ঞতা
+          Customer Experiences
         </h2>
 
         {/* Carousel Slider */}
@@ -107,7 +107,7 @@ function Testimonials() {
                 style={{ width: `${100 / testimonialsData.length}%` }}
               >
                 {/* Testimonial Card */}
-                <div className="w-full bg-[#f8f9fa] border border-gray-100 rounded-[24px] p-8 text-left flex flex-col justify-between h-[230px] shadow-sm select-none">
+                <div className="w-full bg-[#f8f9fa] border border-gray-100  p-8 text-left flex flex-col justify-between h-[230px] shadow-sm select-none">
                   
                   {/* User Profile Block */}
                   <div className="flex items-center gap-4">

@@ -5,8 +5,8 @@ import { FiZap, FiAward, FiTool, FiFeather, FiSun, FiCpu } from 'react-icons/fi'
 const featuresData = [
   {
     id: 1,
-    title: 'দ্রুত চার্জিং',
-    description: 'মাত্র ২ ঘণ্টায় ফুল চার্জ',
+    title: 'Fast Charging',
+    description: 'Full charge in just 2 hours',
     icon: <FiZap />,
     colorClasses: {
       bg: 'bg-amber-50/40',
@@ -18,8 +18,8 @@ const featuresData = [
   },
   {
     id: 2,
-    title: 'দীর্ঘস্থায়ী পারফরম্যান্স',
-    description: '১০ বছর+ স্থিতিশীল ব্যাকআপ',
+    title: 'Long-lasting Performance',
+    description: '10+ years stable backup',
     icon: <FiAward />,
     colorClasses: {
       bg: 'bg-emerald-50/40',
@@ -31,7 +31,7 @@ const featuresData = [
   },
   {
     id: 3,
-    title: 'কম Maintenance',
+    title: 'Low Maintenance',
     description: 'Zero water topup, no acid',
     icon: <FiTool />,
     colorClasses: {
@@ -45,7 +45,7 @@ const featuresData = [
   {
     id: 4,
     title: 'Lightweight Design',
-    description: '৭০% হালকা ও compact',
+    description: '70% lighter and compact',
     icon: <FiFeather />,
     colorClasses: {
       bg: 'bg-purple-50/40',
@@ -58,7 +58,7 @@ const featuresData = [
   {
     id: 5,
     title: 'Solar Friendly',
-    description: 'সোলার এর সাথে perfect match',
+    description: 'Perfect match with solar',
     icon: <FiSun />,
     colorClasses: {
       bg: 'bg-rose-50/40',
@@ -71,7 +71,7 @@ const featuresData = [
   {
     id: 6,
     title: 'Energy Efficient',
-    description: '৯৮% efficiency rate',
+    description: '98% efficiency rate',
     icon: <FiCpu />,
     colorClasses: {
       bg: 'bg-indigo-50/40',
@@ -85,12 +85,12 @@ const featuresData = [
 
 function Why() {
   return (
-    <section className="py-16 bg-white">
+    <section className="py-8 bg-white">
       <Container>
         
         {/* Section Heading */}
         <h2 className="text-[#1a1a1a] font-extrabold text-2xl md:text-3xl text-center font-sans mb-12">
-          কেন Lithium Battery সেরা পছন্দ?
+          Why is Lithium Battery the Best Choice?
         </h2>
 
         {/* 6-Card Responsive Grid */}
@@ -98,7 +98,7 @@ function Why() {
           {featuresData.map((item) => (
             <div
               key={item.id}
-              className={`w-full max-w-[360px] p-8 rounded-[20px] border text-center transition-all duration-300 cursor-pointer shadow-sm ${item.colorClasses.bg} ${item.colorClasses.border} ${item.colorClasses.hover}`}
+              className={`w-full max-w-[360px] p-8  border text-center transition-all duration-300 cursor-pointer shadow-sm ${item.colorClasses.bg} ${item.colorClasses.border} ${item.colorClasses.hover}`}
             >
               
               {/* Icon Container */}

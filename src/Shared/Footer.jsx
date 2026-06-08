@@ -7,7 +7,7 @@ import { IoLocationOutline } from "react-icons/io5";
 
 function Footer() {
   return (
-    <footer className="bg-black text-white py-16 md:py-20 border-t border-neutral-900">
+    <footer className="bg-black text-white py-16 md:py-20 border-t border-neutral-900 mt-8">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           
@@ -25,7 +25,7 @@ function Footer() {
               </span>
             </div>
             <p className="text-[#a0a0a0] text-sm leading-relaxed max-w-[280px]">
-              বাংলাদেশের premium lithium battery brand — নির্ভরযোগ্য পাওয়ার সলিউশনের জন্য বিশ্বস্ত নাম
+              Bangladesh's premium lithium battery brand — a trusted name for reliable power solutions
             </p>
             {/* Social Icons */}
             <div className="flex items-center gap-3">
@@ -61,19 +61,19 @@ function Footer() {
               <li className="flex items-center text-[#a0a0a0]">
                 <span className="text-neutral-600 mr-2 font-mono">&gt;</span>
                 <a href="#home" className="underline underline-offset-4 hover:text-white transition-colors">
-                  হোম
+                  Home
                 </a>
               </li>
               <li className="flex items-center text-[#a0a0a0]">
                 <span className="text-neutral-600 mr-2 font-mono">&gt;</span>
                 <a href="#products" className="underline underline-offset-4 hover:text-white transition-colors">
-                  পণ্যসমূহ
+                  Products
                 </a>
               </li>
               <li className="flex items-center text-[#a0a0a0]">
                 <span className="text-neutral-600 mr-2 font-mono">&gt;</span>
                 <a href="#contact" className="underline underline-offset-4 hover:text-white transition-colors">
-                  যোগাযোগ
+                  Contact
                 </a>
               </li>
             </ul>
@@ -126,7 +126,7 @@ function Footer() {
               </li>
               <li className="flex items-start gap-3">
                 <IoLocationOutline className="text-lg text-neutral-400 flex-shrink-0 mt-0.5" />
-                <span>ঢাকা, বাংলাদেশ</span>
+                <span>Dhaka, Bangladesh</span>
               </li>
             </ul>
           </div>

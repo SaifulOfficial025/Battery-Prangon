@@ -1,34 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { FiShield, FiZap, FiTruck, FiBatteryCharging } from 'react-icons/fi';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 const slidesData = [
   {
     id: 1,
-    image: '/dummysliderimage.png',
-    // Text and graphics are baked into the image. 
-    // We do not add overlays here to avoid duplication.
-    isBaked: true
+    image: '/dummysliderimage.jpg'
   },
   {
     id: 2,
-    image: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&w=1920&q=80',
-    title: 'উন্নত প্রযুক্তির লিথিয়াম ব্যাটারি',
-    subtitle: 'অনন্য স্থায়িত্ব এবং নির্ভরযোগ্য শক্তির নিশ্চয়তা',
-    isBaked: false
+    image: '/dummysliderimage.png'
   },
   {
     id: 3,
-    image: 'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=1920&q=80',
-    title: 'সবুজ শক্তি, সুন্দর ভবিষ্যৎ',
-    subtitle: 'পরিবেশবান্ধব সোলার ও পাওয়ার ব্যাকআপ সলিউশন',
-    isBaked: false
+    image: '/dummysliderimage.jpg'
   },
   {
     id: 4,
-    image: 'https://images.unsplash.com/photo-1548613053-220ef4b80702?auto=format&fit=crop&w=1920&q=80',
-    title: 'স্মার্ট পাওয়ার ব্যাকআপ সিস্টেম',
-    subtitle: 'আপনার বাড়ির জন্য নিরবচ্ছিন্ন বিদ্যুৎ সেবা',
-    isBaked: false
+    image: '/dummysliderimage.png'
   }
 ];
 
@@ -39,7 +27,7 @@ function Slider() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % slidesData.length);
-    }, 5000);
+    }, 2000);
     return () => clearInterval(timer);
   }, []);
 
@@ -47,11 +35,19 @@ function Slider() {
     setCurrentIndex(index);
   };
 
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % slidesData.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + slidesData.length) % slidesData.length);
+  };
+
   return (
-    <div className="w-full flex flex-col">
+    <div className="w-full flex flex-col  overflow-hidden  ">
       
-      {/* Slider Area (16:9 Aspect Ratio, full screen edge-to-edge) */}
-      <div className="w-full aspect-[16/9] relative overflow-hidden bg-neutral-950">
+      {/* Slider Area (16:6 Aspect Ratio) */}
+      <div className="w-full aspect-[16/6] relative overflow-hidden group">
         
         {/* Slides Wrapper */}
         <div className="w-full h-full relative">
@@ -65,26 +61,30 @@ function Slider() {
               {/* Slide Image */}
               <img
                 src={slide.image}
-                alt={slide.title || 'Slide Image'}
-                className="w-full h-full object-cover object-top select-none"
+                alt="Slide Image"
+                className="w-full h-full object-fill select-none"
               />
-
-              {/* Text Overlay (Only for non-baked images) */}
-              {!slide.isBaked && (
-                <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent flex items-center px-8 sm:px-16 md:px-24 z-20">
-                  <div className="max-w-xl text-left">
-                    <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight select-none">
-                      {slide.title}
-                    </h2>
-                    <p className="text-xs sm:text-base md:text-lg text-slate-300 font-medium leading-relaxed select-none">
-                      {slide.subtitle}
-                    </p>
-                  </div>
-                </div>
-              )}
             </div>
           ))}
         </div>
+
+        {/* Left Arrow */}
+        <button
+          onClick={prevSlide}
+          className="absolute top-1/2 -translate-y-1/2 left-4 z-30 w-10 h-10 flex items-center justify-center rounded-full bg-black/30 hover:bg-black/50 text-white transition-all duration-300 opacity-0 group-hover:opacity-100"
+          aria-label="Previous slide"
+        >
+          <FiChevronLeft className="text-2xl" />
+        </button>
+
+        {/* Right Arrow */}
+        <button
+          onClick={nextSlide}
+          className="absolute top-1/2 -translate-y-1/2 right-4 z-30 w-10 h-10 flex items-center justify-center rounded-full bg-black/30 hover:bg-black/50 text-white transition-all duration-300 opacity-0 group-hover:opacity-100"
+          aria-label="Next slide"
+        >
+          <FiChevronRight className="text-2xl" />
+        </button>
 
         {/* Custom Navigation Indicator Dots (Positioned absolutely over the slider) */}
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 z-30">
@@ -102,41 +102,6 @@ function Slider() {
           ))}
         </div>
 
-      </div>
-
-      {/* Features Bar (Renders statically at the bottom) */}
-      <div className="w-full bg-black text-white py-4 md:py-6 px-4 border-t border-neutral-900 z-20">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-          
-          <div className="flex items-center justify-center gap-3">
-            <FiShield className="text-lg md:text-xl text-white flex-shrink-0" />
-            <span className="text-xs md:text-sm lg:text-base font-bold whitespace-nowrap">
-              ১০ বছরের ওয়ারেন্টি
-            </span>
-          </div>
-
-          <div className="flex items-center justify-center gap-3">
-            <FiZap className="text-lg md:text-xl text-white flex-shrink-0" />
-            <span className="text-xs md:text-sm lg:text-base font-bold whitespace-nowrap">
-              ৩০০০+ চার্জ সাইকেল
-            </span>
-          </div>
-
-          <div className="flex items-center justify-center gap-3">
-            <FiTruck className="text-lg md:text-xl text-white flex-shrink-0" />
-            <span className="text-xs md:text-sm lg:text-base font-bold whitespace-nowrap">
-              সারাদেশে ডেলিভারি
-            </span>
-          </div>
-
-          <div className="flex items-center justify-center gap-3">
-            <FiBatteryCharging className="text-lg md:text-xl text-white flex-shrink-0" />
-            <span className="text-xs md:text-sm lg:text-base font-bold whitespace-nowrap">
-              Fast Charging
-            </span>
-          </div>
-
-        </div>
       </div>
 
     </div>

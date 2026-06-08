@@ -26,12 +26,12 @@ const usecasesData = [
 
 function Usecase() {
   return (
-    <section className="py-16 bg-white">
+    <section className="py-8 bg-white">
       <Container>
         
         {/* Title Section */}
         <h2 className="text-[#1a1a1a] font-extrabold text-2xl md:text-3xl text-center font-sans mb-10 md:mb-12">
-          আপনার প্রয়োজন অনুযায়ী পাওয়ার সলিউশন
+          Power Solutions For Your Needs
         </h2>
 
         {/* 4-Column Grid Layout */}
@@ -39,13 +39,13 @@ function Usecase() {
           {usecasesData.map((item) => (
             <div 
               key={item.id}
-              className="relative w-full aspect-[4/5] rounded-[18px] overflow-hidden group shadow-sm cursor-pointer hover:shadow-md transition-shadow duration-300"
+              className="relative w-full aspect-[1/1] overflow-hidden group shadow-sm cursor-pointer transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-md"
             >
               {/* Background Image */}
               <img 
                 src={item.image} 
                 alt={item.title} 
-                className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500 select-none"
+                className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500 ease-in-out select-none"
               />
 
               {/* Bottom Dark Gradient Overlay */}

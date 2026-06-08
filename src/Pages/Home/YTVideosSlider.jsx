@@ -11,31 +11,31 @@ const initialVideos = [
   },
   {
     id: 2,
-    title: "লিথিয়াম ব্যাটারি ও সোলার সিস্টেম কানেকশন গাইড",
+    title: "Lithium Battery & Solar System Connection Guide",
     videoId: "sU-yvM8oUfA",
     thumbnail: "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=600&h=600&q=80"
   },
   {
     id: 3,
-    title: "Dakota Lithium 12V 135Ah ব্যাটারি টেস্ট",
+    title: "Dakota Lithium 12V 135Ah Battery Test",
     videoId: "9x-zL2m53H4",
     thumbnail: "https://images.unsplash.com/photo-1548613053-220ef4b80702?auto=format&fit=crop&w=600&h=600&q=80"
   },
   {
     id: 4,
-    title: "আইপিএস ও হোম ব্যাকআপ ব্যাটারি সেটআপ",
+    title: "IPS & Home Backup Battery Setup",
     videoId: "JtW9wX569wM",
     thumbnail: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&w=600&h=600&q=80"
   },
   {
     id: 5,
-    title: "নতুন প্রযুক্তির সোলার প্যানেল ইনস্টলেশন",
+    title: "New Technology Solar Panel Installation",
     videoId: "YcoGkGshzH8",
     thumbnail: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=600&h=600&q=80"
   },
   {
     id: 6,
-    title: "অফিস ও বিজনেস পাওয়ার ব্যাকআপ সিস্টেম",
+    title: "Office & Business Power Backup System",
     videoId: "rWlH93C3bZc",
     thumbnail: "https://images.unsplash.com/photo-1548613053-220ef4b80702?auto=format&fit=crop&w=600&h=600&q=80"
   }
@@ -72,39 +72,43 @@ function YTVideosSlider() {
   }, [visibleCards, maxIndex, currentIndex]);
 
   const nextSlide = () => {
-    setCurrentIndex((prev) => Math.min(prev + 1, maxIndex));
+    setCurrentIndex((prev) => {
+      if (prev >= maxIndex) return 0;
+      return prev + 1;
+    });
     setActivePlayId(null); // Stop playing video when sliding
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => Math.max(prev - 1, 0));
+    setCurrentIndex((prev) => {
+      if (prev <= 0) return maxIndex;
+      return prev - 1;
+    });
     setActivePlayId(null); // Stop playing video when sliding
   };
 
   return (
-    <section className="py-16 bg-white overflow-hidden">
+    <section className="py-8 bg-white overflow-hidden">
       <Container>
         
         {/* Section Header */}
         <div className="flex items-center justify-between mb-8 pb-4 border-b border-gray-100">
-          <h2 className="text-[#1a1a1a] font-extrabold text-2xl md:text-3xl font-sans">
-            ইউটিউব ভিডিও রিভিউ
-          </h2>
+          {/* <h2 className="text-[#1a1a1a] font-extrabold text-2xl md:text-3xl font-sans">
+            YouTube Video Reviews
+          </h2> */}
           
           {/* Navigation Arrows */}
           <div className="flex items-center gap-2">
             <button
               onClick={prevSlide}
-              disabled={currentIndex === 0}
-              className="w-10 h-10 rounded-full border border-gray-200 bg-white hover:bg-slate-50 text-slate-800 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-all duration-200"
+              className="w-10 h-10 rounded-full border border-gray-200 bg-white hover:bg-slate-50 text-slate-800 flex items-center justify-center transition-all duration-200"
               aria-label="Previous slide"
             >
               <FiChevronLeft className="text-xl" />
             </button>
             <button
               onClick={nextSlide}
-              disabled={currentIndex >= maxIndex}
-              className="w-10 h-10 rounded-full border border-gray-200 bg-white hover:bg-slate-50 text-slate-800 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-all duration-200"
+              className="w-10 h-10 rounded-full border border-gray-200 bg-white hover:bg-slate-50 text-slate-800 flex items-center justify-center transition-all duration-200"
               aria-label="Next slide"
             >
               <FiChevronRight className="text-xl" />
@@ -127,7 +131,7 @@ function YTVideosSlider() {
                 className="px-3 box-border"
                 style={{ width: `${100 / initialVideos.length}%` }}
               >
-                <div className="w-full aspect-square rounded-[24px] overflow-hidden border border-gray-100 shadow-sm relative group bg-black">
+                <div className="w-full aspect-square  overflow-hidden border border-gray-100 shadow-sm relative group bg-black">
                   
                   {activePlayId === video.id ? (
                     /* Play YouTube Video Embed */

@@ -22,16 +22,16 @@ function Header() {
             </a>
           </div>
 
-          {/* Navigation Menu (Bengali) */}
+          {/* Navigation Menu (English) */}
           <nav className="hidden xl:flex items-center gap-8 text-[#0a0a0a] font-semibold text-base">
             <a href="#products" className="hover:text-emerald-500 transition-colors duration-200 whitespace-nowrap">
-              পণ্যসমূহ
+              Products
             </a>
             <a href="#contact" className="hover:text-emerald-500 transition-colors duration-200 whitespace-nowrap">
-              যোগাযোগ
+              Contact
             </a>
             <a href="#about-us" className="hover:text-emerald-500 transition-colors duration-200 whitespace-nowrap">
-              আমাদের সম্পর্কে
+              About Us
             </a>
           </nav>
 

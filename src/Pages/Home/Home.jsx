@@ -1,12 +1,35 @@
 import Container from "../../Layout/Container/Container"
+import Header from "../../Shared/Header"
+import Hero from "./Slider"
+import FeaturedProduct from "./FeaturedProducts"
+import Usecase from "./Usecase"
+import Why from "./Why"
+import YTVideosSlider from "./YTVideosSlider"
+import Testimonials from "./Testimonials"
+import Faqs from "./FAQs"
+import Dealership from "./Dealership"
+import Enquire from "./Enquire"
+import Footer from "../../Shared/Footer"
+
 
 const Home = () => {
   return (
     <div>
-      <h2 className="text-3xl font-bold">landing page contain goes here</h2>
+      <Header />
       <Container>
-          <h2 className="text-3xl ">Container Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt animi alias distinctio eligendi doloremque ducimus illum? Sint harum expedita quibusdam voluptate nihil sed porro quam provident! Vitae numquam delectus quasi.</h2>
+        <div className="my-8 flex flex-col gap-16">
+      <Hero/>
+          <FeaturedProduct/>
+          <Usecase/>
+          <Why/>
+          <YTVideosSlider/>
+          <Testimonials/>
+          <Faqs/>
+        </div>
       </Container>
+      <Dealership/>
+      <Enquire/>
+      <Footer/>
     </div>
   )
 }

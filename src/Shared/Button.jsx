@@ -16,11 +16,11 @@ const Button = ({
   // Variant mappings
   const variants = {
     // Primary variant matching the reference red button
-    primary: 'bg-[#C51C1C] hover:bg-[#A61414] text-white rounded-xl px-8 py-3 shadow-md shadow-red-900/10 hover:shadow-lg hover:shadow-red-900/15',
+    primary: 'bg-[#C51C1C] hover:bg-[#A61414] text-white px-8 py-3 shadow-md shadow-red-900/10 hover:shadow-lg hover:shadow-red-900/15',
     // Secondary variant (e.g. gray bg)
-    secondary: 'bg-[#f1f1f1] hover:bg-slate-200 text-slate-800 rounded-xl px-8 py-3',
+    secondary: 'bg-[#f1f1f1] hover:bg-slate-200 text-slate-800 px-8 py-3',
     // Outline variant with border
-    outline: 'border border-[#C51C1C] text-[#C51C1C] hover:bg-red-50 rounded-xl px-8 py-3',
+    outline: 'border border-[#C51C1C] text-[#C51C1C] hover:bg-red-50 px-8 py-3',
     // Text variant without borders or backgrounds
     text: 'text-slate-700 hover:text-black hover:underline px-4 py-2',
   };
