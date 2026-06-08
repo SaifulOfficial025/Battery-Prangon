@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Container from '../../Layout/Container/Container';
 import ProductCard from '../../Shared/ProductCard';
 
@@ -61,6 +62,7 @@ const productsData = [
 ];
 
 function FeaturedProducts() {
+  const navigate = useNavigate();
   return (
     <section className=" bg-white">
       <Container>
@@ -102,7 +104,7 @@ function FeaturedProducts() {
                 price={product.price}
                 originalPrice={product.originalPrice}
                 image={product.image}
-                onSeeProduct={() => console.log(`See product details for ID: ${product.id}`)}
+                onSeeProduct={() => navigate(`/product-details/${product.id}`)}
               />
 
             </div>
