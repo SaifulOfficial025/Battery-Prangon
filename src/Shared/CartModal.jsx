@@ -75,7 +75,7 @@ function CartModal({ isOpen = true, onClose }) {
         
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-100">
-          <h2 className="text-xl font-bold text-slate-900 font-sans">Your Cart</h2>
+          <h2 className="text-xl font-semibold text-slate-900 font-sans">Your Cart</h2>
           <button 
             type="button" 
             onClick={onClose}
@@ -110,7 +110,7 @@ function CartModal({ isOpen = true, onClose }) {
                 {/* Product Details */}
                 <div className="flex flex-col justify-between flex-grow">
                   <div>
-                    <h3 className="text-sm font-bold text-slate-900 leading-snug pr-2">
+                    <h3 className="text-sm font-semibold text-slate-900 leading-snug pr-2">
                       {item.name}
                     </h3>
                     
@@ -119,7 +119,7 @@ function CartModal({ isOpen = true, onClose }) {
                       <span className="text-sm text-slate-400 line-through">
                         ${item.originalPrice}
                       </span>
-                      <span className="text-sm font-bold text-slate-900">
+                      <span className="text-sm font-semibold text-slate-900">
                         ${item.price}
                       </span>
                     </div>
@@ -169,15 +169,15 @@ function CartModal({ isOpen = true, onClose }) {
         {cartItems.length > 0 && (
           <div className="border-t border-gray-100 p-6 bg-white">
             <div className="flex items-center justify-between mb-6">
-              <span className="text-base font-bold text-slate-900">Subtotal</span>
-              <span className="text-base font-bold text-slate-900">
+              <span className="text-base font-semibold text-slate-900">Subtotal</span>
+              <span className="text-base font-semibold text-slate-900">
                 ${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </span>
             </div>
             
             <Button 
               variant="primary" 
-              className="w-full py-4 text-base font-bold"
+              className="w-full py-4 text-base font-semibold"
               onClick={() => {
                 navigate('/confirm-order');
                 if (onClose) onClose();

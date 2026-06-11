@@ -85,34 +85,34 @@ const featuresData = [
 
 function Why() {
   return (
-    <section className="py-8 bg-white">
+    <section id="about-us" className="py-4 sm:py-8 bg-white">
       <Container>
         
         {/* Section Heading */}
-        <h2 className="text-[#1a1a1a] font-extrabold text-2xl md:text-3xl text-center font-sans mb-12">
+        <h2 className="text-[#1a1a1a] font-semibold text-xl sm:text-2xl md:text-3xl text-center font-sans mb-6 sm:mb-8 md:mb-12">
           Why is Lithium Battery the Best Choice?
         </h2>
 
         {/* 6-Card Responsive Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6 justify-items-center">
           {featuresData.map((item) => (
             <div
               key={item.id}
-              className={`w-full max-w-[360px] p-8  border text-center transition-all duration-300 cursor-pointer shadow-sm ${item.colorClasses.bg} ${item.colorClasses.border} ${item.colorClasses.hover}`}
+              className={`w-full max-w-[360px] p-4 sm:p-6 lg:p-8  border text-center transition-all duration-300 cursor-pointer shadow-sm ${item.colorClasses.bg} ${item.colorClasses.border} ${item.colorClasses.hover}`}
             >
               
               {/* Icon Container */}
-              <div className={`w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl ${item.colorClasses.iconBg} ${item.colorClasses.text}`}>
+              <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 text-lg sm:text-xl ${item.colorClasses.iconBg} ${item.colorClasses.text}`}>
                 {item.icon}
               </div>
 
               {/* Title */}
-              <h3 className="text-[#1a1a1a] font-bold text-lg mb-2">
+              <h3 className="text-[#1a1a1a] font-semibold text-sm sm:text-base lg:text-lg mb-1 sm:mb-2">
                 {item.title}
               </h3>
 
               {/* Description */}
-              <p className="text-slate-500 text-sm font-medium">
+              <p className="text-slate-500 text-xs sm:text-sm font-medium">
                 {item.description}
               </p>
 

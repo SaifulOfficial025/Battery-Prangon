@@ -39,11 +39,11 @@ function FAQs() {
   };
 
   return (
-    <section className="py-8 bg-white">
+    <section className="py-4 sm:py-8 bg-white">
       <Container>
         
         {/* Section Heading */}
-        <h2 className="text-[#1a1a1a] font-extrabold text-2xl md:text-3xl text-center font-sans mb-12">
+        <h2 className="text-[#1a1a1a] font-semibold text-xl sm:text-2xl md:text-3xl text-center font-sans mb-6 sm:mb-8 md:mb-12">
           Questions & Answers
         </h2>
 
@@ -59,7 +59,7 @@ function FAQs() {
               <button
                 type="button"
                 onClick={() => toggleFAQ(index)}
-                className="flex items-center justify-between w-full text-left font-bold text-[#1a1a1a] text-[15px] sm:text-[17px] md:text-lg focus:outline-none select-none hover:text-[#C51C1C] transition-colors duration-200"
+                className="flex items-center justify-between w-full text-left font-semibold text-[#1a1a1a] text-[15px] sm:text-[17px] md:text-lg focus:outline-none select-none hover:text-[#C51C1C] transition-colors duration-200"
               >
                 <span>{faq.question}</span>
                 <span className="text-slate-600 font-normal">

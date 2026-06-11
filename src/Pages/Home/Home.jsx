@@ -10,22 +10,24 @@ import Faqs from "./FAQs"
 import Dealership from "./Dealership"
 import Enquire from "./Enquire"
 import Footer from "../../Shared/Footer"
+import Find from "./Find"
 
 
 const Home = () => {
   return (
     <div>
       <Header />
-      <Container>
+        <Container>
         <div className="my-8 flex flex-col gap-16">
-      <Hero/>
-          <FeaturedProduct/>
-          <Usecase/>
-          <Why/>
-          <YTVideosSlider/>
-          <Testimonials/>
-          <Faqs/>
-        </div>
+          <Hero/>
+          <Find/>
+        <FeaturedProduct/>
+        <Usecase/>
+        <Why/>
+        <YTVideosSlider/>
+        <Testimonials/>
+        <Faqs/>
+      </div>
       </Container>
       <Dealership/>
       <Enquire/>

@@ -1,15 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Container from '../Layout/Container/Container';
 import { IoLogoInstagram, IoLogoFacebook } from "react-icons/io";
 import { FaPhone } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
+import { contactInfo } from './ContactInfo';
 
 function Footer() {
   return (
-    <footer className="bg-black text-white py-16 md:py-20 border-t border-neutral-900 mt-8">
+    <footer className="bg-black text-white py-12 sm:py-16 md:py-20 border-t border-neutral-900 mt-8">
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12 lg:gap-8">
           
           {/* Column 1: Brand Info */}
           <div className="flex flex-col gap-6">
@@ -31,7 +33,7 @@ function Footer() {
             <div className="flex items-center gap-3">
               {/* Instagram Button */}
               <a 
-                href="https://instagram.com" 
+                href={contactInfo.instagram} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] flex items-center justify-center text-white text-xl hover:opacity-90 transition-opacity"
@@ -41,7 +43,7 @@ function Footer() {
               </a>
               {/* Facebook Button */}
               <a 
-                href="https://facebook.com" 
+                href={contactInfo.facebook} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-[#1877F2] flex items-center justify-center text-white text-2xl hover:opacity-90 transition-opacity"
@@ -60,21 +62,21 @@ function Footer() {
             <ul className="flex flex-col gap-4 text-sm">
               <li className="flex items-center text-[#a0a0a0]">
                 <span className="text-neutral-600 mr-2 font-mono">&gt;</span>
-                <a href="#home" className="underline underline-offset-4 hover:text-white transition-colors">
+                <Link to="/" className="underline underline-offset-4 hover:text-white transition-colors">
                   Home
-                </a>
+                </Link>
               </li>
               <li className="flex items-center text-[#a0a0a0]">
                 <span className="text-neutral-600 mr-2 font-mono">&gt;</span>
-                <a href="#products" className="underline underline-offset-4 hover:text-white transition-colors">
+                <Link to="/products" className="underline underline-offset-4 hover:text-white transition-colors">
                   Products
-                </a>
+                </Link>
               </li>
               <li className="flex items-center text-[#a0a0a0]">
                 <span className="text-neutral-600 mr-2 font-mono">&gt;</span>
-                <a href="#contact" className="underline underline-offset-4 hover:text-white transition-colors">
+                <Link to="/#contact" className="underline underline-offset-4 hover:text-white transition-colors">
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -114,24 +116,42 @@ function Footer() {
             <ul className="flex flex-col gap-4 text-sm text-[#a0a0a0]">
               <li className="flex items-center gap-3">
                 <FaPhone className="text-base text-neutral-400 flex-shrink-0" />
-                <a href="tel:+8111XXXXXXXX" className="hover:text-white transition-colors">
-                  +81 11-XXX-XXXX
+                <a href={`tel:${contactInfo.phone.replace(/[^+\d]/g, '')}`} className="hover:text-white transition-colors">
+                  {contactInfo.phone}
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <MdEmail className="text-base text-neutral-400 flex-shrink-0" />
-                <a href="mailto:info@hokkaidotaxi.com" className="hover:text-white transition-colors">
-                  info@hokkaidotaxi.com
+                <a href={`mailto:${contactInfo.mail}`} className="hover:text-white transition-colors">
+                  {contactInfo.mail}
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <IoLocationOutline className="text-lg text-neutral-400 flex-shrink-0 mt-0.5" />
-                <span>Dhaka, Bangladesh</span>
+                <span>{contactInfo.address}</span>
               </li>
             </ul>
           </div>
-
         </div>
+
+        {/* Bottom Bar: Copyright & Developer Info */}
+        <div className="border-t border-white/30 mt-12 md:mt-16 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 lg:text-sm text-xs text-[#757575] font-semibold font-sans select-none">
+          <span>
+            &copy; {new Date().getFullYear()} VOLTRA. All rights reserved.
+          </span>
+          <span>
+            Developed by{' '}
+            <a 
+              href="https://www.linkedin.com/in/md-saiful-islam-rimon-0750b4187" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-neutral-400 hover:text-white transition-colors duration-200 underline underline-offset-4"
+            >
+              Md. Saiful Islam Rimon
+            </a>
+          </span>
+        </div>
+
       </Container>
     </footer>
   );

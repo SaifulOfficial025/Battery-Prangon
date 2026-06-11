@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Container from '../../Layout/Container/Container';
 import { FaStar } from 'react-icons/fa';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 const testimonialsData = [
   {
@@ -50,6 +51,8 @@ const testimonialsData = [
 function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleCards, setVisibleCards] = useState(3);
+  const touchStartX = useRef(null);
+  const touchEndX = useRef(null);
 
   // Update visible cards based on client screen size
   useEffect(() => {
@@ -69,55 +72,116 @@ function Testimonials() {
 
   const maxIndex = Math.max(0, testimonialsData.length - visibleCards);
 
+  // Keep index in bounds on resize
+  useEffect(() => {
+    if (currentIndex > maxIndex) {
+      setCurrentIndex(maxIndex);
+    }
+  }, [visibleCards, maxIndex, currentIndex]);
+
   // Auto-play sliding right-to-left
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentIndex((prev) => {
-        if (prev >= maxIndex) {
-          return 0;
-        }
-        return prev + 1;
-      });
+      setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
     }, 4000);
     return () => clearInterval(timer);
   }, [maxIndex]);
 
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
+  };
+
+  // Touch / swipe handlers
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.changedTouches[0].clientX;
+    touchEndX.current = null;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.changedTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current === null || touchEndX.current === null) return;
+    const diff = touchStartX.current - touchEndX.current;
+    const SWIPE_THRESHOLD = 40;
+    if (diff > SWIPE_THRESHOLD) {
+      nextSlide();
+    } else if (diff < -SWIPE_THRESHOLD) {
+      prevSlide();
+    }
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
+  const totalDots = maxIndex + 1;
+
   return (
-    <section className="py-8 bg-white overflow-hidden">
+    <section className="py-4 sm:py-8 bg-white overflow-hidden">
       <Container>
-        
-        {/* Title */}
-        <h2 className="text-[#1a1a1a] font-extrabold text-2xl md:text-3xl text-center font-sans mb-12">
-          Customer Experiences
-        </h2>
+
+        {/* Title + Nav row */}
+        <div className="flex items-center justify-between mb-6 sm:mb-8 md:mb-12">
+          <h2 className="text-[#1a1a1a] font-semibold text-xl sm:text-2xl md:text-3xl font-sans">
+            Customer Experiences
+          </h2>
+
+          {/* Arrow buttons */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={prevSlide}
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-gray-200 bg-white hover:bg-slate-50 text-slate-800 flex items-center justify-center transition-all duration-200 active:scale-95"
+              aria-label="Previous testimonial"
+            >
+              <FiChevronLeft className="text-lg sm:text-xl" />
+            </button>
+            <button
+              onClick={nextSlide}
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-gray-200 bg-white hover:bg-slate-50 text-slate-800 flex items-center justify-center transition-all duration-200 active:scale-95"
+              aria-label="Next testimonial"
+            >
+              <FiChevronRight className="text-lg sm:text-xl" />
+            </button>
+          </div>
+        </div>
 
         {/* Carousel Slider */}
-        <div className="relative w-full overflow-hidden">
+        <div
+          className="relative w-full overflow-hidden"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
           <div
             className="flex transition-transform duration-700 ease-in-out"
             style={{
-              transform: `translateX(-${currentIndex * (100 / visibleCards)}%)`,
+              transform: `translateX(-${currentIndex * (100 / testimonialsData.length)}%)`,
               width: `${(testimonialsData.length / visibleCards) * 100}%`
             }}
           >
             {testimonialsData.map((item) => (
               <div
                 key={item.id}
-                className="px-3 box-border"
+                className="px-1.5 sm:px-3 box-border"
                 style={{ width: `${100 / testimonialsData.length}%` }}
               >
                 {/* Testimonial Card */}
-                <div className="w-full bg-[#f8f9fa] border border-gray-100  p-8 text-left flex flex-col justify-between h-[230px] shadow-sm select-none">
-                  
+                <div className="w-full bg-[#f8f9fa] border border-gray-100 p-5 sm:p-6 md:p-8 text-left flex flex-col justify-between min-h-[190px] sm:min-h-[230px] shadow-sm select-none rounded-sm">
+
                   {/* User Profile Block */}
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-3 sm:gap-4">
                     <img
                       src={item.avatar}
                       alt={item.name}
-                      className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm flex-shrink-0"
+                      className="w-11 h-11 sm:w-12 sm:h-12 rounded-full object-cover border-2 border-white shadow-sm flex-shrink-0"
+                      draggable={false}
                     />
                     <div>
-                      <h4 className="text-slate-800 font-extrabold text-[15px] leading-tight">
+                      <h4 className="text-slate-800 font-semibold text-[14px] sm:text-[15px] leading-tight">
                         {item.name}
                       </h4>
                       <span className="text-slate-400 text-xs font-semibold uppercase tracking-wider">
@@ -144,15 +208,15 @@ function Testimonials() {
           </div>
         </div>
 
-        {/* Navigation Indicator Dots */}
-        <div className="flex items-center justify-center gap-2 mt-8">
-          {testimonialsData.map((_, index) => (
+        {/* Dot Navigation */}
+        <div className="flex items-center justify-center gap-1.5 mt-4 sm:mt-8">
+          {Array.from({ length: totalDots }).map((_, index) => (
             <button
               key={index}
-              onClick={() => setCurrentIndex(Math.min(index, maxIndex))}
+              onClick={() => setCurrentIndex(index)}
               className={`h-2 rounded-full transition-all duration-300 ${
-                index === currentIndex 
-                  ? 'w-6 bg-[#C51C1C]' 
+                index === currentIndex
+                  ? 'w-6 bg-[#C51C1C]'
                   : 'w-2 bg-slate-200 hover:bg-slate-300'
               }`}
               aria-label={`Go to slide ${index + 1}`}

@@ -49,18 +49,18 @@ function Enquire() {
   ];
 
   return (
-    <section className="py-8 bg-white">
+    <section id="contact" className="py-4 sm:py-8 bg-white">
       <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6 lg:gap-8 items-stretch">
           
           {/* Left Column: Enquiry Form Card */}
           <form 
             onSubmit={handleSubmit}
-            className="bg-white  border border-gray-100 shadow-sm p-6 sm:p-8 flex flex-col justify-between"
+            className="bg-white  border border-gray-100 shadow-sm p-4 sm:p-6 md:p-8 flex flex-col justify-between"
           >
             <div>
               {/* Form Title */}
-              <h2 className="text-[#C51C1C] font-extrabold text-xl md:text-2xl text-left mb-6 font-sans">
+              <h2 className="text-[#C51C1C] font-semibold text-xl md:text-2xl text-left mb-6 font-sans">
                 Enquire about
               </h2>
 
@@ -89,7 +89,7 @@ function Enquire() {
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  placeholder="write Your Name"
+                  placeholder="Full name"
                   className="w-full bg-white text-slate-800 placeholder-slate-400 border border-gray-200 rounded-xl py-3 px-5 focus:outline-none focus:ring-1 focus:ring-[#C51C1C] focus:border-[#C51C1C] text-sm font-medium"
                   required
                 />
@@ -144,7 +144,7 @@ function Enquire() {
               <button
                 type="button"
                 onClick={handleClear}
-                className="w-[125px] py-2.5 bg-white border border-gray-200 text-slate-700 font-bold rounded-xl hover:bg-slate-50 hover:border-gray-300 active:scale-[0.98] transition-all duration-200 text-sm"
+                className="w-[125px] py-3 bg-white border border-gray-200 text-slate-700 font-bold hover:bg-slate-50 hover:border-gray-300 active:scale-[0.98] transition-all duration-200 text-sm"
               >
                 Clear
               </button>
@@ -153,10 +153,10 @@ function Enquire() {
           </form>
 
           {/* Right Column: Google Maps & Find Dealer Block */}
-          <div className="flex flex-col gap-4">
+          <div id="dealer-locations" className="flex flex-col gap-4">
             
             {/* Embedded Google Map */}
-            <div className="w-full h-[340px] lg:h-full min-h-[300px]  overflow-hidden border border-gray-100 shadow-sm relative">
+            <div className="w-full h-[250px] sm:h-[300px] lg:h-full min-h-[250px] sm:min-h-[300px]  overflow-hidden border border-gray-100 shadow-sm relative">
               <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d58412.38423750341!2d90.41957757603694!3d23.79106033459578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1780891339067!5m2!1sen!2sbd" 
                 width="100%" 

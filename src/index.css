@@ -1,13 +1,14 @@
 :root {
-  --font-sans: 'Roboto Flex', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-  --font-serif: 'Playfair Display', Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-sans: 'Roboto Serif', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  --font-serif: 'Roboto Serif', Georgia, Cambria, 'Times New Roman', Times, serif;
 }
 
 html, body, #root {
   font-family: var(--font-sans);
+  font-variant-numeric: lining-nums;
 }
 
-/* Use Playfair Display for headings */
+/* Use Roboto Serif for headings */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
 }

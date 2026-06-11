@@ -16,23 +16,23 @@ function Details() {
       <div className="flex flex-col gap-2 max-w-md">
         <div className="flex justify-between border-b border-gray-100 py-1 text-sm">
           <span className="text-slate-500 font-medium">Nominal Voltage</span>
-          <span className="text-slate-900 font-bold">12.8V</span>
+          <span className="text-slate-900 font-semibold">12.8V</span>
         </div>
         <div className="flex justify-between border-b border-gray-100 py-1 text-sm">
           <span className="text-slate-500 font-medium">Capacity</span>
-          <span className="text-slate-900 font-bold">135Ah</span>
+          <span className="text-slate-900 font-semibold">135Ah</span>
         </div>
         <div className="flex justify-between border-b border-gray-100 py-1 text-sm">
           <span className="text-slate-500 font-medium">Cold Cranking Amps (CCA)</span>
-          <span className="text-slate-900 font-bold">1000A</span>
+          <span className="text-slate-900 font-semibold">1000A</span>
         </div>
         <div className="flex justify-between border-b border-gray-100 py-1 text-sm">
           <span className="text-slate-500 font-medium">Terminals</span>
-          <span className="text-slate-900 font-bold">M8 Bolt</span>
+          <span className="text-slate-900 font-semibold">M8 Bolt</span>
         </div>
         <div className="flex justify-between border-b border-gray-100 py-1 text-sm">
           <span className="text-slate-500 font-medium">Dimensions</span>
-          <span className="text-slate-900 font-bold">9.5" x 6.9" x 7.5"</span>
+          <span className="text-slate-900 font-semibold">9.5" x 6.9" x 7.5"</span>
         </div>
       </div>
     ),
@@ -46,7 +46,7 @@ function Details() {
     <div className="w-full flex flex-col text-left">
       
       {/* Product Title */}
-      <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight mb-5 font-sans">
+      <h1 className="text-3xl sm:text-4xl font-semibold text-slate-900 leading-tight mb-5 font-sans">
         Basic hooded sweatshirt in pink
       </h1>
 
@@ -62,7 +62,7 @@ function Details() {
         <button
           type="button"
           onClick={() => setActiveTab('info')}
-          className={`pb-3 font-sans font-bold text-[15px] transition-all relative focus:outline-none -mb-[1px] ${
+          className={`pb-3 font-sans font-semibold text-[15px] transition-all relative focus:outline-none -mb-[1px] ${
             activeTab === 'info' 
               ? 'text-black border-b-2 border-[#C51C1C]' 
               : 'text-slate-500 hover:text-black border-b-2 border-transparent'
@@ -73,7 +73,7 @@ function Details() {
         <button
           type="button"
           onClick={() => setActiveTab('desc')}
-          className={`pb-3 font-sans font-bold text-[15px] transition-all relative focus:outline-none -mb-[1px] ${
+          className={`pb-3 font-sans font-semibold text-[15px] transition-all relative focus:outline-none -mb-[1px] ${
             activeTab === 'desc' 
               ? 'text-black border-b-2 border-[#C51C1C]' 
               : 'text-slate-500 hover:text-black border-b-2 border-transparent'
@@ -84,7 +84,7 @@ function Details() {
         <button
           type="button"
           onClick={() => setActiveTab('tech')}
-          className={`pb-3 font-sans font-bold text-[15px] transition-all relative focus:outline-none -mb-[1px] ${
+          className={`pb-3 font-sans font-semibold text-[15px] transition-all relative focus:outline-none -mb-[1px] ${
             activeTab === 'tech' 
               ? 'text-black border-b-2 border-[#C51C1C]' 
               : 'text-slate-500 hover:text-black border-b-2 border-transparent'
@@ -104,44 +104,44 @@ function Details() {
       </div>
 
       {/* Price & Purchase Actions Card */}
-      <div className="border border-gray-200 p-6 flex flex-col gap-6 bg-gray-100 mb-10">
-        <div className="flex flex-wrap items-center justify-between gap-4">
+      <div className="border border-gray-200 p-4 sm:p-6 flex flex-col gap-5 sm:gap-6 bg-gray-100 mb-10">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5 sm:gap-4 w-full">
           
           {/* Price Block */}
           <div className="flex items-center gap-3.5">
             <div className="flex flex-col text-left">
-            <span className="bg-[#C51C1C] text-white text-[11px] font-bold px-2.5 py-1 select-none w-fit mb-3">
-              20% OFF
-            </span>
-              <span className="text-lg text-slate-400 line-through font-semibold leading-none mb-1">
+              <span className="bg-[#C51C1C] text-white text-[11px] font-semibold px-2.5 py-1 select-none w-fit mb-2.5">
+                20% OFF
+              </span>
+              <span className="text-sm sm:text-lg text-slate-400 line-through font-semibold leading-none mb-1">
                 $1552
               </span>
-              <span className="text-5xl font-black text-slate-900 font-sans leading-none">
+              <span className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 font-sans leading-none font-semibold">
                 $1242
               </span>
             </div>
           </div>
           
           {/* Quantity & Cart Button Block */}
-          <div className="flex items-center gap-4 ">
+          <div className="flex flex-row items-center gap-3 w-full sm:w-auto">
             
             {/* Quantity Selector */}
-            <div className="flex items-center border border-gray-200 h-11 bg-white select-none">
+            <div className="flex items-center border border-gray-200 h-11 bg-white select-none w-28 sm:w-32 flex-shrink-0">
               <button
                 type="button"
                 onClick={() => setQuantity(prev => (prev > 1 ? prev - 1 : 1))}
-                className="w-10 h-full flex items-center justify-center hover:bg-gray-50 active:bg-gray-100 transition-colors text-slate-600 text-lg focus:outline-none font-semibold"
+                className="flex-grow h-full flex items-center justify-center hover:bg-gray-50 active:bg-gray-100 transition-colors text-slate-655 text-base sm:text-lg focus:outline-none font-semibold"
                 aria-label="Decrease quantity"
               >
                 -
               </button>
-              <span className="w-10 text-center font-bold border-x border-gray-200 h-full flex items-center justify-center text-slate-800">
+              <span className="w-8 sm:w-10 text-center font-semibold border-x border-gray-200 h-full flex items-center justify-center text-slate-800 text-sm">
                 {quantity}
               </span>
               <button
                 type="button"
                 onClick={() => setQuantity(prev => prev + 1)}
-                className="w-10 h-full flex items-center justify-center hover:bg-gray-50 active:bg-gray-100 transition-colors text-slate-600 text-lg focus:outline-none font-semibold"
+                className="flex-grow h-full flex items-center justify-center hover:bg-gray-50 active:bg-gray-100 transition-colors text-slate-655 text-base sm:text-lg focus:outline-none font-semibold"
                 aria-label="Increase quantity"
               >
                 +
@@ -163,27 +163,28 @@ function Details() {
                 window.dispatchEvent(new CustomEvent('add-to-cart', { detail: item }));
                 window.dispatchEvent(new CustomEvent('open-cart'));
               }}
-              className="flex items-center gap-2 px-6 h-11 text-sm font-bold shadow-sm"
+              className="flex-grow sm:flex-grow-0 flex items-center justify-center gap-2 px-4 sm:px-6 h-11 text-xs sm:text-sm font-semibold shadow-sm"
             >
-              <BsCart className="text-base" /> Add to cart
+              <BsCart className="text-sm sm:text-base flex-shrink-0" />
+              <span>Add to cart</span>
             </Button>
 
           </div>
         </div>
 
         {/* Accepted Payment Methods */}
-        <div className="border-t border-gray-100 pt-5 flex justify-center">
+        <div className="border-t border-gray-100 pt-4 sm:pt-5 flex justify-center">
           <img 
             src="/payment-methods.png" 
             alt="Payment Methods" 
-            className="h-10 object-contain select-none"
+            className="h-8 sm:h-10 object-contain select-none"
           />
         </div>
       </div>
 
       {/* Additional Collapsible Information Container */}
       <div className="flex flex-col mt-4">
-        <h2 className="text-[#1a1a1a] font-extrabold text-base font-sans uppercase tracking-wider mb-4">
+        <h2 className="text-[#1a1a1a] font-semibold text-base font-sans uppercase tracking-wider mb-4">
           Additional INFORMATION
         </h2>
         
@@ -194,7 +195,7 @@ function Details() {
             <button
               type="button"
               onClick={() => toggleAccordion('shipping')}
-              className="w-full flex items-center justify-between p-5 text-left font-sans font-bold text-[15px] text-slate-800 hover:bg-gray-50/50 transition-colors focus:outline-none"
+              className="w-full flex items-center justify-between p-5 text-left font-sans font-semibold text-[15px] text-slate-800 hover:bg-gray-50/50 transition-colors focus:outline-none"
             >
               <span>Shipping</span>
               <FiChevronDown 
@@ -211,7 +212,7 @@ function Details() {
             >
               <div className="p-6 flex flex-col gap-5 text-slate-600 text-[13px] leading-relaxed">
                 <div>
-                  <h4 className="font-extrabold text-slate-900 text-sm mb-1.5 font-sans">
+                  <h4 className="font-semibold text-slate-900 text-sm mb-1.5 font-sans">
                     Shipping policy
                   </h4>
                   <p>
@@ -219,7 +220,7 @@ function Details() {
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-extrabold text-slate-900 text-sm mb-1.5 font-sans">
+                  <h4 className="font-semibold text-slate-900 text-sm mb-1.5 font-sans">
                     Shipping Costs
                   </h4>
                   <p>
@@ -235,7 +236,7 @@ function Details() {
             <button
               type="button"
               onClick={() => toggleAccordion('faq')}
-              className="w-full flex items-center justify-between p-5 text-left font-sans font-bold text-[15px] text-slate-800 hover:bg-gray-50/50 transition-colors focus:outline-none"
+              className="w-full flex items-center justify-between p-5 text-left font-sans font-semibold text-[15px] text-slate-800 hover:bg-gray-50/50 transition-colors focus:outline-none"
             >
               <span>FAQ</span>
               <FiChevronDown 
@@ -263,7 +264,7 @@ function Details() {
             <button
               type="button"
               onClick={() => toggleAccordion('warranty')}
-              className="w-full flex items-center justify-between p-5 text-left font-sans font-bold text-[15px] text-slate-800 hover:bg-gray-50/50 transition-colors focus:outline-none"
+              className="w-full flex items-center justify-between p-5 text-left font-sans font-semibold text-[15px] text-slate-800 hover:bg-gray-50/50 transition-colors focus:outline-none"
             >
               <span>Warranty</span>
               <FiChevronDown 

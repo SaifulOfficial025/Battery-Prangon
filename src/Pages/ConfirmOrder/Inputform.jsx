@@ -21,14 +21,14 @@ function Inputform() {
       
       {/* 1. Billing Details Section */}
       <div>
-        <h2 className="text-xl font-extrabold text-slate-900 mb-6 uppercase tracking-wide">
+        <h2 className="text-xl font-semibold text-slate-900 mb-6 uppercase tracking-wide">
           Add Billing details
         </h2>
         
         <div className="flex flex-col gap-5">
           {/* Phone */}
           <div className="flex flex-col gap-1.5 relative">
-            <label className="text-[13px] font-bold text-slate-800">
+            <label className="text-[13px] font-semibold text-slate-800">
               Phone <span className="text-[#C51C1C]">*</span>
             </label>
             <div className="relative w-full">
@@ -53,7 +53,7 @@ function Inputform() {
 
           {/* Name */}
           <div className="flex flex-col gap-1.5 relative">
-            <label className="text-[13px] font-bold text-slate-800">
+            <label className="text-[13px] font-semibold text-slate-800">
               Name <span className="text-[#C51C1C]">*</span>
             </label>
             <div className="relative w-full">
@@ -78,7 +78,7 @@ function Inputform() {
 
           {/* Company Name */}
           <div className="flex flex-col gap-1.5">
-            <label className="text-[13px] font-bold text-slate-850">
+            <label className="text-[13px] font-semibold text-slate-850">
               Company name (optional)
             </label>
             <input
@@ -91,7 +91,7 @@ function Inputform() {
 
           {/* City / Town Dropdown */}
           <div className="flex flex-col gap-1.5 relative">
-            <label className="text-[13px] font-bold text-slate-800">
+            <label className="text-[13px] font-semibold text-slate-800">
               City/Town <span className="text-[#C51C1C]">*</span>
             </label>
             <div className="relative w-full">
@@ -111,7 +111,7 @@ function Inputform() {
 
           {/* Post Code Dropdown */}
           <div className="flex flex-col gap-1.5 relative">
-            <label className="text-[13px] font-bold text-slate-800">
+            <label className="text-[13px] font-semibold text-slate-800">
               Post code <span className="text-[#C51C1C]">*</span>
             </label>
             <div className="relative w-full">
@@ -131,7 +131,7 @@ function Inputform() {
 
           {/* Street Address */}
           <div className="flex flex-col gap-1.5">
-            <label className="text-[13px] font-bold text-slate-800">
+            <label className="text-[13px] font-semibold text-slate-800">
               Street address <span className="text-[#C51C1C]">*</span>
             </label>
             <input
@@ -145,7 +145,7 @@ function Inputform() {
 
           {/* Email */}
           <div className="flex flex-col gap-1.5 relative">
-            <label className="text-[13px] font-bold text-slate-800">
+            <label className="text-[13px] font-semibold text-slate-800">
               Email <span className="text-[#C51C1C]">*</span>
             </label>
             <div className="relative w-full">
@@ -173,7 +173,7 @@ function Inputform() {
             <button
               type="button"
               onClick={() => setShowNotes(!showNotes)}
-              className="text-sm font-bold text-slate-800 underline hover:text-[#C51C1C] transition-colors focus:outline-none"
+              className="text-sm font-semibold text-slate-800 underline hover:text-[#C51C1C] transition-colors focus:outline-none"
             >
               Add order notes?
             </button>
@@ -193,7 +193,7 @@ function Inputform() {
 
       {/* 2. Payment Options Section */}
       <div>
-        <h2 className="text-xl font-extrabold text-slate-900 mb-6 uppercase tracking-wide">
+        <h2 className="text-xl font-semibold text-slate-900 mb-6 uppercase tracking-wide">
           Payment Options
         </h2>
 
@@ -208,8 +208,8 @@ function Inputform() {
               onChange={() => setPaymentMethod('cod')}
               className="mt-1 accent-[#C51C1C] w-4.5 h-4.5 cursor-pointer"
             />
-            <div className="flex flex-col">
-              <span className="text-[15px] font-bold text-slate-900 leading-snug">
+            <div className="flex flex-col ml-2">
+              <span className="text-[15px] font-semibold text-slate-900 leading-snug">
                 Cash on delivery
               </span>
               <span className="text-[13px] text-slate-500 font-medium">
@@ -228,7 +228,7 @@ function Inputform() {
               onChange={() => setPaymentMethod('card')}
               className="mt-1 accent-[#C51C1C] w-4.5 h-4.5 cursor-pointer"
             />
-            <div className="flex flex-col gap-1.5">
+            <div className="flex flex-col gap-1.5 ml-2">
               {/* Payment Methods Logo Block */}
               <div className="flex items-center gap-2">
                 <img 
@@ -246,60 +246,60 @@ function Inputform() {
       </div>
 
       {/* 3. Order Summary Box */}
-      <div>
-        <h2 className="text-xl font-extrabold text-slate-900 mb-6 uppercase tracking-wide">
+      <div className="hidden lg:block">
+        <h2 className="text-xl font-semibold text-slate-900 mb-6 uppercase tracking-wide">
           Order summary
         </h2>
 
-        <div className="border border-gray-200 p-6 bg-white flex flex-col font-sans select-none">
+        <div className="border border-gray-200 p-4 sm:p-6 bg-white flex flex-col font-sans select-none">
           {/* Summary Items */}
-          <div className="flex flex-col gap-4.5 pb-5">
-            <div className="flex flex-col sm:flex-row justify-between gap-2 text-sm">
-              <span className="font-bold text-slate-800 text-left max-w-md">
+          <div className="flex flex-col gap-4 pb-5">
+            <div className="flex flex-col sm:flex-row justify-between gap-2 text-xs sm:text-sm mb-2">
+              <span className="font-semibold text-slate-800 text-left max-w-md">
                 Dakota Lithium DL+ 12V 135Ah Heated Dual Purpose LiFePO4 Battery (Open Box)
               </span>
               <div className="flex justify-between sm:justify-end gap-8 flex-shrink-0">
                 <span className="text-slate-400 font-medium">$310 x 1</span>
-                <span className="font-bold text-slate-900">$310</span>
+                <span className="font-semibold text-slate-900">$310</span>
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row justify-between gap-2 text-sm">
-              <span className="font-bold text-slate-800 text-left max-w-md">
+            <div className="flex flex-col sm:flex-row justify-between gap-2 text-xs sm:text-sm">
+              <span className="font-semibold text-slate-800 text-left max-w-md">
                 Dakota Lithium DL+ 12V 135Ah Heated Dual Purpose LiFePO4 Battery (Open Box)
               </span>
               <div className="flex justify-between sm:justify-end gap-8 flex-shrink-0">
                 <span className="text-slate-400 font-medium">$310 x 1</span>
-                <span className="font-bold text-slate-900">$310</span>
+                <span className="font-semibold text-slate-900">$310</span>
               </div>
             </div>
           </div>
 
           {/* Pricing Totals List */}
-          <div className="border-t border-gray-150 pt-5 flex flex-col gap-4">
+          <div className="border-t border-gray-200 pt-4 sm:pt-5 flex flex-col gap-3 sm:gap-4">
             
             {/* Subtotal */}
-            <div className="flex justify-between text-sm">
-              <span className="font-bold text-slate-900">Subtotal</span>
-              <span className="font-bold text-slate-900">$620</span>
+            <div className="flex justify-between text-xs sm:text-sm">
+              <span className="font-semibold text-slate-900">Subtotal</span>
+              <span className="font-semibold text-slate-900">$620</span>
             </div>
 
             {/* Shipment */}
-            <div className="border-t border-dashed border-gray-150 pt-4 flex justify-between text-sm">
+            <div className="border-t border-dashed border-gray-200 pt-3.5 sm:pt-4 flex justify-between text-xs sm:text-sm">
               <span className="font-semibold text-slate-600">Shipment</span>
-              <span className="font-bold text-slate-900">$30</span>
+              <span className="font-semibold text-slate-900">$30</span>
             </div>
 
             {/* Coupon Discount */}
-            <div className="border-t border-dashed border-gray-150 pt-4 flex justify-between text-sm">
-              <span className="font-semibold text-slate-600">coupon</span>
-              <span className="font-bold text-[#C51C1C]">$14</span>
+            <div className="border-t border-dashed border-gray-200 pt-3.5 sm:pt-4 flex justify-between text-xs sm:text-sm">
+              <span className="font-semibold text-slate-600">Coupon</span>
+              <span className="font-semibold text-[#C51C1C]">$14</span>
             </div>
 
             {/* Grand Total */}
-            <div className="border-t border-gray-200 pt-5 flex justify-between items-end">
-              <span className="text-base font-extrabold text-slate-900">Total</span>
-              <span className="text-2xl font-black text-slate-900 leading-none">
+            <div className="border-t border-gray-200 pt-4 sm:pt-5 flex justify-between items-end">
+              <span className="text-sm sm:text-base font-semibold text-slate-900">Total</span>
+              <span className="text-xl sm:text-2xl font-black text-slate-900 leading-none font-semibold">
                 $455
               </span>
             </div>

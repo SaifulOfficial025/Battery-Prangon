@@ -61,7 +61,7 @@ function ConfirmsectionRightside() {
 
             {/* Product Details Section */}
             <div className="flex flex-col justify-between flex-grow text-left">
-              <h3 className="text-sm font-bold text-slate-900 leading-snug">
+              <h3 className="text-sm font-semibold   text-slate-900 leading-snug">
                 {item.name}
               </h3>
 
@@ -70,7 +70,7 @@ function ConfirmsectionRightside() {
                 <span className="text-sm text-slate-400 line-through">
                   ${item.originalPrice}
                 </span>
-                <span className="text-sm font-bold text-slate-900">
+                <span className="text-sm font-semibold text-slate-900">
                   ${item.price}
                 </span>
               </div>
@@ -118,6 +118,43 @@ function ConfirmsectionRightside() {
         )}
       </div>
 
+      {/* Order Summary (Mobile Only: hidden on lg screens and above) */}
+      {items.length > 0 && (
+        <div className="block lg:hidden border border-gray-200 p-4 bg-white flex flex-col font-sans select-none my-1">
+          <h3 className="text-sm font-semibold text-slate-900 mb-4 uppercase tracking-wide text-left">
+            Order summary
+          </h3>
+          
+          <div className="flex flex-col gap-3">
+            {/* Subtotal */}
+            <div className="flex justify-between text-xs font-semibold text-slate-900">
+              <span>Subtotal</span>
+              <span>${items.reduce((acc, item) => acc + (item.price * item.quantity), 0)}</span>
+            </div>
+
+            {/* Shipment */}
+            <div className="border-t border-dashed border-gray-200 pt-3 flex justify-between text-xs font-semibold text-slate-600">
+              <span>Shipment</span>
+              <span>$30</span>
+            </div>
+
+            {/* Coupon Discount */}
+            <div className="border-t border-dashed border-gray-200 pt-3 flex justify-between text-xs font-semibold text-slate-600">
+              <span>Coupon</span>
+              <span className="text-[#C51C1C]">$14</span>
+            </div>
+
+            {/* Grand Total */}
+            <div className="border-t border-gray-200 pt-4 flex justify-between items-end">
+              <span className="text-xs sm:text-sm font-semibold text-slate-900">Total</span>
+              <span className="text-lg sm:text-xl font-black text-slate-900 leading-none">
+                ${Math.max(0, items.reduce((acc, item) => acc + (item.price * item.quantity), 0) + 30 - 14)}
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Coupon Code Input */}
       <div className="relative w-full">
         <div className="bg-[#f5f5f5] py-3.5 px-4 flex items-center gap-3 w-full border border-transparent focus-within:border-gray-200">
@@ -136,7 +173,7 @@ function ConfirmsectionRightside() {
       <Button
         variant="primary"
         onClick={() => console.log('Proceeding with payment for items:', items)}
-        className="w-full py-4 text-base font-bold"
+        className="w-full py-4 text-base font-semibold"
         disabled={items.length === 0}
       >
         Make Payment

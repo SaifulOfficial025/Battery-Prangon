@@ -26,16 +26,16 @@ const usecasesData = [
 
 function Usecase() {
   return (
-    <section className="py-8 bg-white">
+    <section className="py-4 sm:py-8 bg-white">
       <Container>
         
         {/* Title Section */}
-        <h2 className="text-[#1a1a1a] font-extrabold text-2xl md:text-3xl text-center font-sans mb-10 md:mb-12">
+        <h2 className="text-[#1a1a1a] font-semibold text-xl sm:text-2xl md:text-3xl text-center font-sans mb-6 sm:mb-10 md:mb-12">
           Power Solutions For Your Needs
         </h2>
 
         {/* 4-Column Grid Layout */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 justify-items-center">
           {usecasesData.map((item) => (
             <div 
               key={item.id}
@@ -52,8 +52,8 @@ function Usecase() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10" />
 
               {/* Absolute Text Title over Image */}
-              <div className="absolute bottom-6 left-6 right-6 z-20 text-left">
-                <h3 className="text-white font-bold text-lg md:text-xl leading-tight tracking-wide max-w-[200px] select-none">
+              <div className="absolute bottom-3 left-3 right-3 sm:bottom-6 sm:left-6 sm:right-6 z-20 text-left">
+                <h3 className="text-white font-bold text-sm sm:text-lg md:text-xl leading-tight tracking-wide max-w-[200px] select-none">
                   {item.title}
                 </h3>
               </div>
