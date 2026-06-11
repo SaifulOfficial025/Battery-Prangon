@@ -142,7 +142,7 @@ function Header() {
       {/* Mobile Menu Slide-out */}
       <div className={`fixed top-0 left-0 w-[280px] h-full bg-white z-[70] transform transition-transform duration-300 ease-in-out xl:hidden flex flex-col shadow-2xl ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         
-        <div className="flex items-center justify-between p-4 border-b border-gray-100">
+        <div className="flex items-center justify-between p-4 border-b border-gray-300">
           <img src="/logo.png" alt="Battery Logo" className="h-8 w-auto object-contain" />
           <button 
             type="button"
