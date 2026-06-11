@@ -232,7 +232,7 @@ function Details() {
           </div>
 
           {/* Accordion 2: FAQ */}
-          <div className="flex flex-col">
+          {/* <div className="flex flex-col">
             <button
               type="button"
               onClick={() => toggleAccordion('faq')}
@@ -257,7 +257,7 @@ function Details() {
                 </p>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Accordion 3: Warranty */}
           <div className="flex flex-col">
