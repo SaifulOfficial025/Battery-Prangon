@@ -90,7 +90,7 @@ function Enquire() {
                   value={formData.name}
                   onChange={handleInputChange}
                   placeholder="Full name"
-                  className="w-full bg-white text-slate-800 placeholder-slate-400 border border-gray-200 rounded-xl py-3 px-5 focus:outline-none focus:ring-1 focus:ring-[#C51C1C] focus:border-[#C51C1C] text-sm font-medium"
+                  className="w-full bg-white text-slate-800 placeholder-slate-400 border border-gray-200  py-3 px-5 focus:outline-none focus:ring-1 focus:ring-[#C51C1C] focus:border-[#C51C1C] text-sm font-medium"
                   required
                 />
                 <input
@@ -99,7 +99,7 @@ function Enquire() {
                   value={formData.address}
                   onChange={handleInputChange}
                   placeholder="Address"
-                  className="w-full bg-white text-slate-800 placeholder-slate-400 border border-gray-200 rounded-xl py-3 px-5 focus:outline-none focus:ring-1 focus:ring-[#C51C1C] focus:border-[#C51C1C] text-sm font-medium"
+                  className="w-full bg-white text-slate-800 placeholder-slate-400 border border-gray-200  py-3 px-5 focus:outline-none focus:ring-1 focus:ring-[#C51C1C] focus:border-[#C51C1C] text-sm font-medium"
                 />
                 <input
                   type="email"
@@ -107,7 +107,7 @@ function Enquire() {
                   value={formData.email}
                   onChange={handleInputChange}
                   placeholder="Email"
-                  className="w-full bg-white text-slate-800 placeholder-slate-400 border border-gray-200 rounded-xl py-3 px-5 focus:outline-none focus:ring-1 focus:ring-[#C51C1C] focus:border-[#C51C1C] text-sm font-medium"
+                  className="w-full bg-white text-slate-800 placeholder-slate-400 border border-gray-200  py-3 px-5 focus:outline-none focus:ring-1 focus:ring-[#C51C1C] focus:border-[#C51C1C] text-sm font-medium"
                   required
                 />
                 <input
@@ -116,7 +116,7 @@ function Enquire() {
                   value={formData.phone}
                   onChange={handleInputChange}
                   placeholder="Phone"
-                  className="w-full bg-white text-slate-800 placeholder-slate-400 border border-gray-200 rounded-xl py-3 px-5 focus:outline-none focus:ring-1 focus:ring-[#C51C1C] focus:border-[#C51C1C] text-sm font-medium"
+                  className="w-full bg-white text-slate-800 placeholder-slate-400 border border-gray-200  py-3 px-5 focus:outline-none focus:ring-1 focus:ring-[#C51C1C] focus:border-[#C51C1C] text-sm font-medium"
                   required
                 />
               </div>
@@ -127,7 +127,7 @@ function Enquire() {
                 value={formData.query}
                 onChange={handleInputChange}
                 placeholder="Query description"
-                className="w-full h-32 bg-white text-slate-800 placeholder-slate-400 border border-gray-200 rounded-xl py-3.5 px-5 focus:outline-none focus:ring-1 focus:ring-[#C51C1C] focus:border-[#C51C1C] text-sm font-medium mb-4 resize-none"
+                className="w-full h-32 bg-white text-slate-800 placeholder-slate-400 border border-gray-200  py-3.5 px-5 focus:outline-none focus:ring-1 focus:ring-[#C51C1C] focus:border-[#C51C1C] text-sm font-medium mb-4 resize-none"
                 required
               />
             </div>
