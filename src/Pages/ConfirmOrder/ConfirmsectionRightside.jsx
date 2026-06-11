@@ -147,7 +147,7 @@ function ConfirmsectionRightside() {
             {/* Grand Total */}
             <div className="border-t border-gray-200 pt-4 flex justify-between items-end">
               <span className="text-xs sm:text-sm font-semibold text-slate-900">Total</span>
-              <span className="text-lg sm:text-xl font-black text-slate-900 leading-none">
+              <span className="text-lg sm:text-xl font-black text-slate-900 leading-none font-semibold">
                 ${Math.max(0, items.reduce((acc, item) => acc + (item.price * item.quantity), 0) + 30 - 14)}
               </span>
             </div>
