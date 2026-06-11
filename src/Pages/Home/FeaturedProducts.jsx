@@ -72,12 +72,7 @@ function FeaturedProducts() {
           <h2 className="text-[#1a1a1a] font-semibold text-xl md:text-3xl font-sans text-center sm:text-left">
             Popular Battery Collection
           </h2>
-          <Link 
-            to="/products" 
-            className="text-sm font-semibold text-slate-500 hover:text-[#C51C1C] transition-colors duration-200"
-          >
-            See more
-          </Link>
+       
         </div>
 
         {/* 6-Card Grid Layout */}
@@ -111,7 +106,14 @@ function FeaturedProducts() {
             </div>
           ))}
         </div>
-
+        <div className="flex justify-center mt-8">
+          <Link 
+            to="/products" 
+            className="text-sm md:text-md font-semibold text-slate-500 hover:text-[#C51C1C] transition-colors duration-200"
+          >
+            See more
+          </Link>
+        </div>
       </Container>
     </section>
   );
