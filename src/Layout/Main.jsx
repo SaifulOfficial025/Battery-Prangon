@@ -1,11 +1,12 @@
-import { Outlet } from "react-router-dom"
+import { Outlet, ScrollRestoration } from "react-router-dom";
 
 const Main = () => {
   return (
-    <div>
-      <Outlet/>
-    </div>
-  )
-}
+    <>
+      <ScrollRestoration />
+      <Outlet />
+    </>
+  );
+};
 
-export default Main
+export default Main;

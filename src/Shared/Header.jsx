@@ -155,6 +155,13 @@ function Header() {
 
         <nav className="flex flex-col p-4 gap-4">
           <Link 
+            to="/" 
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="text-md font-semibold text-slate-800 hover:text-[#C51C1C] transition-colors"
+          >
+            Home
+          </Link>
+          <Link 
             to="/products" 
             onClick={() => setIsMobileMenuOpen(false)}
             className="text-md font-semibold text-slate-800 hover:text-[#C51C1C] transition-colors"
