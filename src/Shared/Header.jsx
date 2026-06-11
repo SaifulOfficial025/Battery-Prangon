@@ -157,42 +157,42 @@ function Header() {
           <Link 
             to="/products" 
             onClick={() => setIsMobileMenuOpen(false)}
-            className="text-lg font-semibold text-slate-800 hover:text-[#C51C1C] transition-colors"
+            className="text-md font-semibold text-slate-800 hover:text-[#C51C1C] transition-colors"
           >
             Products
           </Link>
           <Link 
             to="/#contact" 
             onClick={() => setIsMobileMenuOpen(false)}
-            className="text-lg font-semibold text-slate-800 hover:text-[#C51C1C] transition-colors"
+            className="text-md font-semibold text-slate-800 hover:text-[#C51C1C] transition-colors"
           >
             Contact
           </Link>
           <Link 
             to="/#about-us" 
             onClick={() => setIsMobileMenuOpen(false)}
-            className="text-lg font-semibold text-slate-800 hover:text-[#C51C1C] transition-colors"
+            className="text-md font-semibold text-slate-800 hover:text-[#C51C1C] transition-colors"
           >
             About Us
           </Link>
           {/* Language Selector In Mobile Menu drawer */}
-          <div className="flex items-center justify-between border-t border-gray-100 pt-4 mt-2">
-            <span className="text-sm font-bold text-slate-500">Language / ভাষা</span>
+          {/* <div className="flex items-center justify-between border-t border-gray-100 pt-4 mt-2">
+            <span className="text-sm font-semibold text-slate-500">Language / ভাষা</span>
             <button
               type="button"
               onClick={() => {
                 setLang(lang === 'en' ? 'bn' : 'en');
                 setIsMobileMenuOpen(false);
               }}
-              className="px-3 py-1.5 bg-[#f1f1f1] hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-full transition-colors duration-200 select-none"
+              className="px-3 py-1.5 bg-[#f1f1f1] hover:bg-slate-200 text-slate-800 text-xs font-semibold rounded-full transition-colors duration-200 select-none"
             >
               {lang === 'en' ? 'বাংলা (BN)' : 'English (EN)'}
             </button>
-          </div>
+          </div> */}
         </nav>
 
         <div className="mt-auto p-4 border-t border-gray-100 bg-gray-50">
-          <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">
+          <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4">
             Need Help?
           </div>
           <a 
@@ -202,7 +202,7 @@ function Header() {
             <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm">
               <FaPhone className="text-lg" />
             </div>
-            <span className="font-bold">{contactInfo.phone}</span>
+            <span className="font-semibold text-md">{contactInfo.phone}</span>
           </a>
           <a 
             href={`https://wa.me/${contactInfo.whatsapp.replace(/[^+\d]/g, '')}`} 
@@ -211,7 +211,7 @@ function Header() {
             <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm">
               <FaWhatsappSquare className="text-2xl text-[#25D366]" />
             </div>
-            <span className="font-bold">WhatsApp Us</span>
+            <span className="font-semibold text-md">WhatsApp Us</span>
           </a>
         </div>
 
