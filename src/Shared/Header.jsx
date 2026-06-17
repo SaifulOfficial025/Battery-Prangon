@@ -47,10 +47,10 @@ function Header() {
             <Link to="/products" className="hover:text-emerald-500 transition-colors duration-200 whitespace-nowrap">
               Products
             </Link>
-            <Link to="/#contact" className="hover:text-emerald-500 transition-colors duration-200 whitespace-nowrap">
+            <Link to="/contact" className="hover:text-emerald-500 transition-colors duration-200 whitespace-nowrap">
               Contact
             </Link>
-            <Link to="/#about-us" className="hover:text-emerald-500 transition-colors duration-200 whitespace-nowrap">
+            <Link to="/about-us" className="hover:text-emerald-500 transition-colors duration-200 whitespace-nowrap">
               About Us
             </Link>
           </nav>
@@ -169,14 +169,14 @@ function Header() {
             Products
           </Link>
           <Link 
-            to="/#contact" 
+            to="/contact" 
             onClick={() => setIsMobileMenuOpen(false)}
             className="text-md font-semibold text-slate-800 hover:text-[#C51C1C] transition-colors"
           >
             Contact
           </Link>
           <Link 
-            to="/#about-us" 
+            to="/about-us" 
             onClick={() => setIsMobileMenuOpen(false)}
             className="text-md font-semibold text-slate-800 hover:text-[#C51C1C] transition-colors"
           >

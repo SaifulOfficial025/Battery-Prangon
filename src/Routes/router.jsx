@@ -4,7 +4,8 @@ import Home from "../Pages/Home/Home";
 import Products from "../Pages/Product/Home";
 import ProductDetails from "../Pages/Product/ProductDetails/Home";
 import ConfirmOrder from "../Pages/ConfirmOrder/Home";
-
+import AboutUs from "../Pages/AboutUs/Home";
+import Contact from "../Pages/Contact/Home";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -25,6 +26,14 @@ export const router = createBrowserRouter([
       {
         path: "/confirm-order",
         element: <ConfirmOrder />
+      },
+      {
+        path: "/about-us",
+        element: <AboutUs />
+      },
+      {
+        path: "contact",
+        element: <Contact/>
       }
     ]
   }
