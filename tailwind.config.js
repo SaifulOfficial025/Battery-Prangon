@@ -9,8 +9,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Roboto Serif"', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial'],
-        serif: ['"Roboto Serif"', 'Playfair Display', 'Georgia', 'Cambria', "Times New Roman", 'Times', 'serif'],
+        sans: ['var(--font-sans)', '"Roboto Serif"', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial'],
+        serif: ['var(--font-serif)', '"Roboto Serif"', 'Playfair Display', 'Georgia', 'Cambria', "Times New Roman", 'Times', 'serif'],
       },
     },
   },

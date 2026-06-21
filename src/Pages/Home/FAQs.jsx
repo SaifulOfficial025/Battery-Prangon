@@ -1,36 +1,67 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import Container from '../../Layout/Container/Container';
 import { FiChevronUp, FiChevronDown } from 'react-icons/fi';
 
-const faqsData = [
-  {
-    id: 1,
-    question: 'How many years does a Lithium battery last?',
-    answer: 'With proper usage, our lithium battery provides stable performance for 10-12 years and supports 3000+ charge cycles.'
-  },
-  {
-    id: 2,
-    question: 'Can it be used with an IPS?',
-    answer: 'Yes, our lithium batteries are fully compatible with any modern IPS and UPS systems on the market.'
-  },
-  {
-    id: 3,
-    question: 'Is it Solar compatible?',
-    answer: 'Yes, it works excellently with solar systems through a solar charge controller or hybrid inverter and ensures fast charging.'
-  },
-  {
-    id: 4,
-    question: 'How many days for Delivery?',
-    answer: 'We typically ensure fast and safe home delivery within 24-48 hours inside Dhaka city and 3-5 working days outside Dhaka.'
-  },
-  {
-    id: 5,
-    question: 'How does the Warranty work?',
-    answer: 'We provide a 10-year official replacement warranty with every battery. Contact our customer care for any manufacturing defects for a quick resolution.'
-  }
-];
+const faqsData = {
+  en: [
+    {
+      id: 1,
+      question: 'How long does the battery last?',
+      answer: 'Generally, it can be used for 5 to 10 years.'
+    },
+    {
+      id: 2,
+      question: 'Can it be used in solar systems?',
+      answer: 'Yes, it is fully compatible.'
+    },
+    {
+      id: 3,
+      question: 'How many days for delivery?',
+      answer: 'Usually within 1–3 days all over Bangladesh.'
+    },
+    {
+      id: 4,
+      question: 'Can I get a dealership?',
+      answer: 'Yes, dealership opportunities are available nationwide.'
+    },
+    {
+      id: 5,
+      question: 'Is the battery safe?',
+      answer: 'Yes, our battery is fully protected by BMS and safe.'
+    }
+  ],
+  bn: [
+    {
+      id: 1,
+      question: 'ব্যাটারি কতদিন চলে?',
+      answer: 'সাধারণত ৫ থেকে ১০ বছর পর্যন্ত ব্যবহার করা যায়।'
+    },
+    {
+      id: 2,
+      question: 'সোলার সিস্টেমে ব্যবহার করা যাবে?',
+      answer: 'হ্যাঁ, সম্পূর্ণভাবে সামঞ্জস্যপূর্ণ (compatible)।'
+    },
+    {
+      id: 3,
+      question: 'ডেলিভারি কত দিনে?',
+      answer: 'সাধারণত ১–৩ দিনের মধ্যে সারা বাংলাদেশে।'
+    },
+    {
+      id: 4,
+      question: 'ডিলার নেওয়া যাবে?',
+      answer: 'হ্যাঁ, সারা দেশে ডিলারের সুযোগ রয়েছে।'
+    },
+    {
+      id: 5,
+      question: 'ব্যাটারি কি নিরাপদ?',
+      answer: 'হ্যাঁ, আমাদের ব্যাটারি সম্পূর্ণ BMS সুরক্ষিত এবং নিরাপদ।'
+    }
+  ]
+};
 
 function FAQs() {
+  const lang = useSelector((state) => state.lang.lang);
   // First item is expanded by default to match the reference image
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -38,18 +69,21 @@ function FAQs() {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
+  const currentFaqs = faqsData[lang] || faqsData.en;
+  const sectionTitle = lang === 'bn' ? 'FAQ (সাধারণ প্রশ্ন)' : 'FAQ (Frequently Asked Questions)';
+
   return (
     <section className="py-4 sm:py-8 bg-white">
       <Container>
         
         {/* Section Heading */}
         <h2 className="text-[#1a1a1a] font-semibold text-xl sm:text-2xl md:text-3xl text-center font-sans mb-6 sm:mb-8 md:mb-12">
-          Questions & Answers
+          {sectionTitle}
         </h2>
 
         {/* Accordion List Wrapper */}
         <div className="max-w-4xl mx-auto flex flex-col">
-          {faqsData.map((faq, index) => (
+          {currentFaqs.map((faq, index) => (
             <div 
               key={faq.id} 
               className="border-b border-slate-100 py-5 flex flex-col"

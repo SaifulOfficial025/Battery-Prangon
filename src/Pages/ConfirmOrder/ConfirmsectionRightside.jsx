@@ -1,8 +1,37 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { FiTag } from 'react-icons/fi';
 import Button from '../../Shared/Button';
 
+const translations = {
+  en: {
+    remove: 'Remove',
+    noItems: 'No items in your order.',
+    orderSummary: 'Order summary',
+    subtotal: 'Subtotal',
+    shipment: 'Shipment',
+    coupon: 'Coupon',
+    total: 'Total',
+    couponPlaceholder: 'Apply coupon code',
+    makePayment: 'Make Payment'
+  },
+  bn: {
+    remove: 'মুছুন',
+    noItems: 'আপনার অর্ডারে কোন পণ্য নেই।',
+    orderSummary: 'অর্ডার সারসংক্ষেপ',
+    subtotal: 'সাবটোটাল',
+    shipment: 'শিপমেন্ট',
+    coupon: 'কুপন',
+    total: 'মোট',
+    couponPlaceholder: 'কুপন কোড প্রয়োগ করুন',
+    makePayment: 'পেমেন্ট করুন'
+  }
+};
+
 function ConfirmsectionRightside() {
+  const lang = useSelector((state) => state.lang.lang);
+  const t = translations[lang] || translations.en;
+
   const [items, setItems] = useState([
     {
       id: 1,
@@ -40,6 +69,21 @@ function ConfirmsectionRightside() {
     setItems(prevItems => prevItems.filter(item => item.id !== id));
   };
 
+  // Format price helper with Taka sign and Bengali digits support
+  const formatPrice = (amount) => {
+    const formatted = amount.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+    if (lang === 'bn') {
+      const bnDigits = {
+        '0': '০', '1': '১', '2': '২', '3': '৩', '4': '৪',
+        '5': '৫', '6': '৬', '7': '৭', '8': '৮', '9': '৯'
+      };
+      return '৳' + formatted.split('').map(char => bnDigits[char] || char).join('');
+    }
+    return '৳' + formatted;
+  };
+
+  const subtotalValue = items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+
   return (
     <div className="w-full flex flex-col gap-4">
       
@@ -68,10 +112,10 @@ function ConfirmsectionRightside() {
               {/* Price Details */}
               <div className="flex items-center gap-3 mt-2">
                 <span className="text-sm text-slate-400 line-through">
-                  ${item.originalPrice}
+                  {formatPrice(item.originalPrice)}
                 </span>
                 <span className="text-sm font-semibold text-slate-900">
-                  ${item.price}
+                  {formatPrice(item.price)}
                 </span>
               </div>
 
@@ -87,7 +131,13 @@ function ConfirmsectionRightside() {
                     -
                   </button>
                   <span className="w-8 text-center font-medium border-x border-gray-200 h-full flex items-center justify-center text-slate-800">
-                    {item.quantity}
+                    {lang === 'bn' 
+                      ? item.quantity.toString().split('').map(c => ({
+                          '0': '০', '1': '১', '2': '২', '3': '৩', '4': '৪',
+                          '5': '৫', '6': '৬', '7': '৭', '8': '৮', '9': '৯'
+                        })[c] || c).join('')
+                      : item.quantity
+                    }
                   </span>
                   <button
                     type="button"
@@ -104,7 +154,7 @@ function ConfirmsectionRightside() {
                   onClick={() => removeItem(item.id)}
                   className="text-xs font-semibold text-slate-500 hover:text-[#C51C1C] underline transition-colors focus:outline-none"
                 >
-                  Remove
+                  {t.remove}
                 </button>
               </div>
             </div>
@@ -113,7 +163,7 @@ function ConfirmsectionRightside() {
 
         {items.length === 0 && (
           <div className="border border-dashed border-gray-300 p-8 text-center text-slate-400 text-sm">
-            No items in your order.
+            {t.noItems}
           </div>
         )}
       </div>
@@ -122,33 +172,33 @@ function ConfirmsectionRightside() {
       {items.length > 0 && (
         <div className="block lg:hidden border border-gray-200 p-4 bg-white flex flex-col font-sans select-none my-1">
           <h3 className="text-sm font-semibold text-slate-900 mb-4 uppercase tracking-wide text-left">
-            Order summary
+            {t.orderSummary}
           </h3>
           
           <div className="flex flex-col gap-3">
             {/* Subtotal */}
             <div className="flex justify-between text-xs font-semibold text-slate-900">
-              <span>Subtotal</span>
-              <span>${items.reduce((acc, item) => acc + (item.price * item.quantity), 0)}</span>
+              <span>{t.subtotal}</span>
+              <span>{formatPrice(subtotalValue)}</span>
             </div>
 
             {/* Shipment */}
             <div className="border-t border-dashed border-gray-200 pt-3 flex justify-between text-xs font-semibold text-slate-600">
-              <span>Shipment</span>
-              <span>$30</span>
+              <span>{t.shipment}</span>
+              <span>{formatPrice(30)}</span>
             </div>
 
             {/* Coupon Discount */}
             <div className="border-t border-dashed border-gray-200 pt-3 flex justify-between text-xs font-semibold text-slate-600">
-              <span>Coupon</span>
-              <span className="text-[#C51C1C]">$14</span>
+              <span>{t.coupon}</span>
+              <span className="text-[#C51C1C]">{formatPrice(14)}</span>
             </div>
 
             {/* Grand Total */}
             <div className="border-t border-gray-200 pt-4 flex justify-between items-end">
-              <span className="text-xs sm:text-sm font-semibold text-slate-900">Total</span>
+              <span>{t.total}</span>
               <span className="text-lg sm:text-xl font-black text-slate-900 leading-none font-semibold">
-                ${Math.max(0, items.reduce((acc, item) => acc + (item.price * item.quantity), 0) + 30 - 14)}
+                {formatPrice(Math.max(0, subtotalValue + 30 - 14))}
               </span>
             </div>
           </div>
@@ -161,7 +211,7 @@ function ConfirmsectionRightside() {
           <FiTag className="text-slate-400 text-lg flex-shrink-0" />
           <input
             type="text"
-            placeholder="Apply coupon code"
+            placeholder={t.couponPlaceholder}
             value={coupon}
             onChange={(e) => setCoupon(e.target.value)}
             className="w-full bg-transparent border-none outline-none text-sm text-slate-800 placeholder-slate-400 font-sans"
@@ -176,7 +226,7 @@ function ConfirmsectionRightside() {
         className="w-full py-4 text-base font-semibold"
         disabled={items.length === 0}
       >
-        Make Payment
+        {t.makePayment}
       </Button>
 
     </div>

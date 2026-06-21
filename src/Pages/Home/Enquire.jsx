@@ -1,11 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Container from '../../Layout/Container/Container';
 import Button from '../../Shared/Button';
 import { FaMapMarkerAlt } from 'react-icons/fa';
+import { submitContact, resetContactStatus } from '../../Redux/Contact';
+import { getContactInfo } from '../../Shared/ContactInfo';
+
+const translations = {
+  en: {
+    heading: 'Enquire about',
+    name: 'Full name',
+    address: 'Address',
+    email: 'Email',
+    phone: 'Phone/WhatsApp',
+    query: 'Query description',
+    submit: 'Submit',
+    clear: 'Clear',
+    findDealer: 'Find your nearest dealer',
+    submitting: 'Submitting...',
+    success: 'Thank you! Your enquiry has been sent successfully.',
+    error: 'Failed to send enquiry. Please try again.'
+  },
+  bn: {
+    heading: 'অনুসন্ধান করুন',
+    name: 'পূর্ণ নাম',
+    address: 'ঠিকানা',
+    email: 'ইমেইল',
+    phone: 'ফোন/হোয়াটসঅ্যাপ',
+    query: 'অনুসন্ধানের বিবরণ',
+    submit: 'সাবমিট',
+    clear: 'মুছে ফেলুন',
+    findDealer: 'আপনার নিকটস্থ ডিলার খুঁজুন',
+    submitting: 'সাবমিট হচ্ছে...',
+    success: 'ধন্যবাদ! আপনার অনুসন্ধান সফলভাবে পাঠানো হয়েছে।',
+    error: 'অনুসন্ধান পাঠাতে ব্যর্থ হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।'
+  }
+};
 
 function Enquire() {
-  const [activeCategory, setActiveCategory] = useState('AUTOMOTIVE BATTERIES');
-  
+  const dispatch = useDispatch();
+  const lang = useSelector((state) => state.lang.lang);
+  const { loading, successMessage, error } = useSelector((state) => state.contact);
+  const t = translations[lang] || translations.en;
+  const info = getContactInfo(lang);
+
   // Form input states
   const [formData, setFormData] = useState({
     name: '',
@@ -14,6 +52,8 @@ function Enquire() {
     phone: '',
     query: ''
   });
+
+  const [toast, setToast] = useState({ show: false, message: '', type: '' });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -31,22 +71,44 @@ function Enquire() {
       phone: '',
       query: ''
     });
+    dispatch(resetContactStatus());
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Enquiry Submitted:', {
-      category: activeCategory,
-      ...formData
-    });
-    // Add logic here if required
+    dispatch(submitContact(formData));
   };
 
-  const categories = [
-    'AUTOMOTIVE BATTERIES',
-    'E- RICKSHAW VEHICLES',
-    'SOLAR & INVERTER BATTERIES'
-  ];
+  useEffect(() => {
+    if (successMessage) {
+      setToast({ show: true, message: t.success, type: 'success' });
+      // Reset form on success
+      setFormData({
+        name: '',
+        address: '',
+        email: '',
+        phone: '',
+        query: ''
+      });
+      // Clear toast and status after 4 seconds
+      const timer = setTimeout(() => {
+        setToast({ show: false, message: '', type: '' });
+        dispatch(resetContactStatus());
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [successMessage, t.success, dispatch]);
+
+  useEffect(() => {
+    if (error) {
+      setToast({ show: true, message: `${t.error} (${error})`, type: 'error' });
+      const timer = setTimeout(() => {
+        setToast({ show: false, message: '', type: '' });
+        dispatch(resetContactStatus());
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [error, t.error, dispatch]);
 
   return (
     <section id="contact" className="py-4 sm:py-8 bg-white">
@@ -56,31 +118,24 @@ function Enquire() {
           {/* Left Column: Enquiry Form Card */}
           <form 
             onSubmit={handleSubmit}
-            className="bg-white  border border-gray-100 shadow-sm p-4 sm:p-6 md:p-8 flex flex-col justify-between"
+            className="bg-white border border-gray-100 shadow-sm p-4 sm:p-6 md:p-8 flex flex-col justify-between"
           >
             <div>
               {/* Form Title */}
               <h2 className="text-[#C51C1C] font-semibold text-xl md:text-2xl text-left mb-6 font-sans">
-                Enquire about
+                {t.heading}
               </h2>
 
-              {/* Category Options Row */}
-              {/* <div className="flex flex-wrap items-center gap-2 mb-8">
-                {categories.map((cat) => (
-                  <button
-                    key={cat}
-                    type="button"
-                    onClick={() => setActiveCategory(cat)}
-                    className={`px-4 py-2 rounded-full text-[10px] sm:text-xs font-bold tracking-wider transition-all duration-200 select-none uppercase border ${
-                      activeCategory === cat
-                        ? 'border-neutral-500 bg-white text-slate-800'
-                        : 'border-transparent bg-transparent text-slate-400 hover:text-slate-600'
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                ))}
-              </div> */}
+              {/* Toast/Notification Message */}
+              {toast.show && (
+                <div className={`p-4 mb-4 text-sm font-medium border rounded-sm ${
+                  toast.type === 'success' 
+                    ? 'bg-emerald-50 text-emerald-800 border-emerald-100' 
+                    : 'bg-rose-50 text-rose-800 border-rose-100'
+                }`}>
+                  {toast.message}
+                </div>
+              )}
 
               {/* Form Inputs Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
@@ -89,8 +144,8 @@ function Enquire() {
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  placeholder="Full name"
-                  className="w-full bg-white text-slate-800 placeholder-slate-400 border border-gray-200  py-3 px-5 focus:outline-none focus:ring-1 focus:ring-[#C51C1C] focus:border-[#C51C1C] text-sm font-medium"
+                  placeholder={t.name}
+                  className="w-full bg-white text-slate-800 placeholder-slate-400 border border-gray-200 py-3 px-5 focus:outline-none focus:ring-1 focus:ring-[#C51C1C] focus:border-[#C51C1C] text-sm font-medium"
                   required
                 />
                 <input
@@ -98,16 +153,16 @@ function Enquire() {
                   name="address"
                   value={formData.address}
                   onChange={handleInputChange}
-                  placeholder="Address"
-                  className="w-full bg-white text-slate-800 placeholder-slate-400 border border-gray-200  py-3 px-5 focus:outline-none focus:ring-1 focus:ring-[#C51C1C] focus:border-[#C51C1C] text-sm font-medium"
+                  placeholder={t.address}
+                  className="w-full bg-white text-slate-800 placeholder-slate-400 border border-gray-200 py-3 px-5 focus:outline-none focus:ring-1 focus:ring-[#C51C1C] focus:border-[#C51C1C] text-sm font-medium"
                 />
                 <input
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  placeholder="Email"
-                  className="w-full bg-white text-slate-800 placeholder-slate-400 border border-gray-200  py-3 px-5 focus:outline-none focus:ring-1 focus:ring-[#C51C1C] focus:border-[#C51C1C] text-sm font-medium"
+                  placeholder={t.email}
+                  className="w-full bg-white text-slate-800 placeholder-slate-400 border border-gray-200 py-3 px-5 focus:outline-none focus:ring-1 focus:ring-[#C51C1C] focus:border-[#C51C1C] text-sm font-medium"
                   required
                 />
                 <input
@@ -115,8 +170,8 @@ function Enquire() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  placeholder="Phone"
-                  className="w-full bg-white text-slate-800 placeholder-slate-400 border border-gray-200  py-3 px-5 focus:outline-none focus:ring-1 focus:ring-[#C51C1C] focus:border-[#C51C1C] text-sm font-medium"
+                  placeholder={t.phone}
+                  className="w-full bg-white text-slate-800 placeholder-slate-400 border border-gray-200 py-3 px-5 focus:outline-none focus:ring-1 focus:ring-[#C51C1C] focus:border-[#C51C1C] text-sm font-medium"
                   required
                 />
               </div>
@@ -126,8 +181,8 @@ function Enquire() {
                 name="query"
                 value={formData.query}
                 onChange={handleInputChange}
-                placeholder="Query description"
-                className="w-full h-32 bg-white text-slate-800 placeholder-slate-400 border border-gray-200  py-3.5 px-5 focus:outline-none focus:ring-1 focus:ring-[#C51C1C] focus:border-[#C51C1C] text-sm font-medium mb-4 resize-none"
+                placeholder={t.query}
+                className="w-full h-32 bg-white text-slate-800 placeholder-slate-400 border border-gray-200 py-3.5 px-5 focus:outline-none focus:ring-1 focus:ring-[#C51C1C] focus:border-[#C51C1C] text-sm font-medium mb-4 resize-none"
                 required
               />
             </div>
@@ -138,15 +193,17 @@ function Enquire() {
                 type="submit" 
                 variant="primary" 
                 className="w-[125px] py-2.5 font-bold shadow-sm"
+                disabled={loading}
               >
-                Submit
+                {loading ? t.submitting : t.submit}
               </Button>
               <button
                 type="button"
                 onClick={handleClear}
-                className="w-[125px] py-3 bg-white border border-gray-200 text-slate-700 font-bold hover:bg-slate-50 hover:border-gray-300 active:scale-[0.98] transition-all duration-200 text-sm"
+                disabled={loading}
+                className="w-[125px] py-3 bg-white border border-gray-200 text-slate-700 font-bold hover:bg-slate-50 hover:border-gray-300 active:scale-[0.98] transition-all duration-200 text-sm disabled:opacity-50"
               >
-                Clear
+                {t.clear}
               </button>
             </div>
 
@@ -156,9 +213,9 @@ function Enquire() {
           <div id="dealer-locations" className="flex flex-col gap-4">
             
             {/* Embedded Google Map */}
-            <div className="w-full h-[250px] sm:h-[300px] lg:h-full min-h-[250px] sm:min-h-[300px]  overflow-hidden border border-gray-100 shadow-sm relative">
+            <div className="w-full h-[250px] sm:h-[300px] lg:h-full min-h-[250px] sm:min-h-[300px] overflow-hidden border border-gray-100 shadow-sm relative">
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d58412.38423750341!2d90.41957757603694!3d23.79106033459578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1780891339067!5m2!1sen!2sbd" 
+                src={info.mapEmbedUrl} 
                 width="100%" 
                 height="100%" 
                 style={{ border: 0 }} 
@@ -172,11 +229,11 @@ function Enquire() {
             {/* Find Dealer Locator Button */}
             <a 
               href="#dealer-locations"
-              className="w-full py-4  bg-[#ffd2d2]/70 hover:bg-[#ffbcc4] flex items-center justify-center gap-2.5 transition-all duration-200 hover:scale-[1.01] cursor-pointer"
+              className="w-full py-4 bg-[#ffd2d2]/70 hover:bg-[#ffbcc4] flex items-center justify-center gap-2.5 transition-all duration-200 hover:scale-[1.01] cursor-pointer"
             >
               <FaMapMarkerAlt className="text-xl text-[#C51C1C]" />
               <span className="text-slate-800 text-[15px] font-bold select-none">
-                Find your nearest dealer
+                {t.findDealer}
               </span>
             </a>
 

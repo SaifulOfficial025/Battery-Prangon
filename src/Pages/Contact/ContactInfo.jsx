@@ -1,15 +1,35 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Container from '../../Layout/Container/Container';
 import { Phone, Clock, Building2 } from 'lucide-react';
-import { contactInfo } from '../../Shared/ContactInfo';
+import { getContactInfo } from '../../Shared/ContactInfo';
+
+const translations = {
+  en: {
+    heading: 'Contact Information',
+    whatsappPhone: 'WhatsApp / Phone',
+    officeAddress: 'Office Address',
+    officeHours: 'Office Hours',
+  },
+  bn: {
+    heading: 'যোগাযোগের তথ্য',
+    whatsappPhone: 'হোয়াটস্যাপ / ফোন',
+    officeAddress: 'অফিস ঠিকানা',
+    officeHours: 'অফিস সময়',
+  }
+};
 
 function ContactInfo() {
+  const lang = useSelector((state) => state.lang.lang);
+  const info = getContactInfo(lang);
+  const t = translations[lang] || translations.en;
+
   return (
     <div className="w-full bg-white text-slate-800 py-12 md:py-16">
       <Container>
         {/* Centered Heading */}
-        <h2 className="text-2xl md:text-3xl font-bold font-serif text-slate-900 text-center mb-8 md:mb-12">
-          যোগাযোগের তথ্য
+        <h2 className="text-2xl md:text-3xl font-semibold font-serif text-slate-900 text-center mb-8 md:mb-12">
+          {t.heading}
         </h2>
 
         {/* 2-Column Grid */}
@@ -21,9 +41,9 @@ function ContactInfo() {
               <Phone className="w-5 h-5" />
             </div>
             <div className="flex flex-col">
-              <span className="text-xs text-slate-400 font-sans transition-colors duration-300 group-hover:text-slate-500">WhatsApp / ফোন</span>
+              <span className="text-xs text-slate-400 font-sans transition-colors duration-300 group-hover:text-slate-500">{t.whatsappPhone}</span>
               <span className="text-slate-800 font-bold text-base md:text-lg font-sans mt-1 transition-colors duration-300 group-hover:text-slate-950">
-                {contactInfo.phone}
+                {info.phone}
               </span>
             </div>
           </div>
@@ -34,11 +54,11 @@ function ContactInfo() {
               <Building2 className="w-5 h-5" />
             </div>
             <div className="flex flex-col">
-              <span className="text-xs text-slate-400 font-sans transition-colors duration-300 group-hover:text-slate-500">অফিস ঠিকানা</span>
+              <span className="text-xs text-slate-400 font-sans transition-colors duration-300 group-hover:text-slate-500">{t.officeAddress}</span>
               <p className="text-slate-800 font-bold text-sm md:text-base font-sans mt-2 leading-relaxed transition-colors duration-300 group-hover:text-slate-950">
-                {contactInfo.addressLines[0]} <br />
-                {contactInfo.addressLines[1]} <br />
-                {contactInfo.addressLines[2]}
+                {info.addressLines?.[0]} <br />
+                {info.addressLines?.[1]} <br />
+                {info.addressLines?.[2]}
               </p>
             </div>
           </div>
@@ -49,9 +69,9 @@ function ContactInfo() {
               <Phone className="w-5 h-5" />
             </div>
             <div className="flex flex-col">
-              <span className="text-xs text-slate-400 font-sans transition-colors duration-300 group-hover:text-slate-500 font-sans">WhatsApp / ফোন</span>
+              <span className="text-xs text-slate-400 font-sans transition-colors duration-300 group-hover:text-slate-500 font-sans">{t.whatsappPhone}</span>
               <span className="text-slate-800 font-bold text-base md:text-lg font-sans mt-1 transition-colors duration-300 group-hover:text-slate-950 font-sans">
-                {contactInfo.phone2}
+                {info.phone2}
               </span>
             </div>
           </div>
@@ -62,10 +82,10 @@ function ContactInfo() {
               <Clock className="w-5 h-5" />
             </div>
             <div className="flex flex-col">
-              <span className="text-xs text-slate-400 font-sans transition-colors duration-300 group-hover:text-slate-500 font-sans">অফিস সময়</span>
+              <span className="text-xs text-slate-400 font-sans transition-colors duration-300 group-hover:text-slate-500 font-sans">{t.officeHours}</span>
               <p className="text-slate-800 font-bold text-sm md:text-base font-sans mt-2 leading-relaxed transition-colors duration-300 group-hover:text-slate-950 font-sans">
-                {contactInfo.officeHours[0]} <br />
-                {contactInfo.officeHours[1]}
+                {info.officeHours?.[0]} <br />
+                {info.officeHours?.[1]}
               </p>
             </div>
           </div>

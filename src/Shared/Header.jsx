@@ -5,13 +5,53 @@ import { IoSearchOutline, IoMenu, IoClose } from "react-icons/io5";
 import { FaPhone } from "react-icons/fa6";
 import { FaWhatsappSquare } from "react-icons/fa";
 import { BsCart } from "react-icons/bs";
-import { contactInfo } from './ContactInfo';
+import { getContactInfo } from './ContactInfo';
 import CartModal from './CartModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleLang } from '../Redux/Lang';
+
+const translations = {
+  en: {
+    products: 'Products',
+    contact: 'Contact',
+    aboutUs: 'About Us',
+    home: 'Home',
+    searchPlaceholder: 'Search product..',
+    searchAria: 'Search',
+    callUsNow: 'Call Us Now:',
+    langTitle: 'Switch to Bangla',
+    phoneTitle: 'Call Us',
+    whatsappTitle: 'WhatsApp',
+    cartTitle: 'Cart',
+    menuOpenAria: 'Open mobile menu',
+    needHelp: 'Need Help?',
+    whatsappUs: 'WhatsApp Us',
+  },
+  bn: {
+    products: 'পণ্যসমূহ',
+    contact: 'যোগাযোগ',
+    aboutUs: 'আমাদের সম্পর্কে',
+    home: 'হোম',
+    searchPlaceholder: 'পণ্য খুঁজুন..',
+    searchAria: 'খুঁজুন',
+    callUsNow: 'কল করুন:',
+    langTitle: 'English এ পরিবর্তন করুন',
+    phoneTitle: 'কল করুন',
+    whatsappTitle: 'হোয়াটসঅ্যাপ',
+    cartTitle: 'কার্ট',
+    menuOpenAria: 'মোবাইল মেনু খুলুন',
+    needHelp: 'সহায়তা প্রয়োজন?',
+    whatsappUs: 'হোয়াটসঅ্যাপ করুন',
+  }
+};
 
 function Header() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [lang, setLang] = useState('en'); // 'en' or 'bn'
+  const dispatch = useDispatch();
+  const lang = useSelector((state) => state.lang.lang);
+  const info = getContactInfo(lang);
+  const t = translations[lang] || translations.en;
 
   useEffect(() => {
     const handleOpenCart = () => setIsCartOpen(true);
@@ -29,7 +69,7 @@ function Header() {
             <button 
               className="xl:hidden text-2xl text-slate-800 p-1 hover:text-[#C51C1C] transition-colors"
               onClick={() => setIsMobileMenuOpen(true)}
-              aria-label="Open mobile menu"
+              aria-label={t.menuOpenAria}
             >
               <IoMenu />
             </button>
@@ -45,13 +85,13 @@ function Header() {
           {/* Desktop Navigation Menu */}
           <nav className="hidden xl:flex items-center gap-8 text-[#0a0a0a] font-semibold text-base">
             <Link to="/products" className="hover:text-emerald-500 transition-colors duration-200 whitespace-nowrap">
-              Products
+              {t.products}
             </Link>
             <Link to="/contact" className="hover:text-emerald-500 transition-colors duration-200 whitespace-nowrap">
-              Contact
+              {t.contact}
             </Link>
             <Link to="/about-us" className="hover:text-emerald-500 transition-colors duration-200 whitespace-nowrap">
-              About Us
+              {t.aboutUs}
             </Link>
           </nav>
 
@@ -60,13 +100,13 @@ function Header() {
             <div className="relative w-full">
               <input
                 type="text"
-                placeholder="Search product.."
+                placeholder={t.searchPlaceholder}
                 className="w-full bg-[#f1f1f1] text-slate-800 placeholder-slate-400 py-2.5 pl-6 pr-12 focus:outline-none focus:ring-1 focus:ring-red-600 text-sm font-normal"
               />
               <button 
                 type="button"
                 className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-600 hover:text-black transition-colors"
-                aria-label="Search"
+                aria-label={t.searchAria}
               >
                 <IoSearchOutline className="text-xl" />
               </button>
@@ -78,10 +118,10 @@ function Header() {
             {/* Call Block */}
             <div className="hidden lg:flex flex-col text-right">
               <span className="text-[11px] text-slate-700 font-medium uppercase tracking-wider leading-none mb-1">
-                Call Us Now:
+                {t.callUsNow}
               </span>
               <span className="text-[15px] text-[#0a0a0a] font-bold leading-none">
-                {contactInfo.phone}
+                {info.phone}
               </span>
             </div>
 
@@ -90,29 +130,29 @@ function Header() {
               {/* Language Changer Button */}
               <button
                 type="button"
-                onClick={() => setLang(lang === 'en' ? 'bn' : 'en')}
+                onClick={() => dispatch(toggleLang())}
                 className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#f1f1f1] hover:bg-slate-200 text-slate-800 flex items-center justify-center font-bold text-xs sm:text-sm font-sans transition-colors duration-200 active:scale-95 select-none"
-                title={lang === 'en' ? 'Switch to Bangla' : 'Switch to English'}
+                title={t.langTitle}
               >
                 {lang === 'en' ? 'বাং' : 'EN'}
               </button>
 
               {/* Phone Icon Button */}
               <a
-                href={`tel:${contactInfo.phone.replace(/[^+\d]/g, '')}`}
+                href={`tel:${info.phone.replace(/[^+\d]/g, '')}`}
                 className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#f1f1f1] hover:bg-slate-200 text-slate-800 flex items-center justify-center transition-colors duration-200 text-lg"
-                title="Call Us"
+                title={t.phoneTitle}
               >
                 <FaPhone />
               </a>
 
               {/* WhatsApp Icon Button */}
               <a
-                href={`https://wa.me/${contactInfo.whatsapp.replace(/[^+\d]/g, '')}`}
+                href={`https://wa.me/${info.whatsapp.replace(/[^+\d]/g, '')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#f1f1f1] hover:bg-slate-200 text-[#25D366] flex items-center justify-center transition-colors duration-200 text-2xl"
-                title="WhatsApp"
+                title={t.whatsappTitle}
               >
                 <FaWhatsappSquare />
               </a>
@@ -122,7 +162,7 @@ function Header() {
                 type="button"
                 onClick={() => setIsCartOpen(true)}
                 className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#f1f1f1] hover:bg-slate-200 text-slate-800 flex items-center justify-center transition-colors duration-200 text-xl relative"
-                title="Cart"
+                title={t.cartTitle}
               >
                 <BsCart />
                 <span className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 w-2.5 h-2.5 bg-red-600 rounded-full border border-white"></span>
@@ -159,66 +199,66 @@ function Header() {
             onClick={() => setIsMobileMenuOpen(false)}
             className="text-md font-semibold text-slate-800 hover:text-[#C51C1C] transition-colors"
           >
-            Home
+            {t.home}
           </Link>
           <Link 
             to="/products" 
             onClick={() => setIsMobileMenuOpen(false)}
             className="text-md font-semibold text-slate-800 hover:text-[#C51C1C] transition-colors"
           >
-            Products
+            {t.products}
           </Link>
           <Link 
             to="/contact" 
             onClick={() => setIsMobileMenuOpen(false)}
             className="text-md font-semibold text-slate-800 hover:text-[#C51C1C] transition-colors"
           >
-            Contact
+            {t.contact}
           </Link>
           <Link 
             to="/about-us" 
             onClick={() => setIsMobileMenuOpen(false)}
             className="text-md font-semibold text-slate-800 hover:text-[#C51C1C] transition-colors"
           >
-            About Us
+            {t.aboutUs}
           </Link>
           {/* Language Selector In Mobile Menu drawer */}
-          {/* <div className="flex items-center justify-between border-t border-gray-100 pt-4 mt-2">
+          <div className="flex items-center justify-between border-t border-gray-100 pt-4 mt-2">
             <span className="text-sm font-semibold text-slate-500">Language / ভাষা</span>
             <button
               type="button"
               onClick={() => {
-                setLang(lang === 'en' ? 'bn' : 'en');
+                dispatch(toggleLang());
                 setIsMobileMenuOpen(false);
               }}
               className="px-3 py-1.5 bg-[#f1f1f1] hover:bg-slate-200 text-slate-800 text-xs font-semibold rounded-full transition-colors duration-200 select-none"
             >
               {lang === 'en' ? 'বাংলা (BN)' : 'English (EN)'}
             </button>
-          </div> */}
+          </div>
         </nav>
 
         <div className="mt-auto p-4 border-t border-gray-100 bg-gray-50">
           <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4">
-            Need Help?
+            {t.needHelp}
           </div>
           <a 
-            href={`tel:${contactInfo.phone.replace(/[^+\d]/g, '')}`} 
+            href={`tel:${info.phone.replace(/[^+\d]/g, '')}`} 
             className="flex items-center gap-3 mb-4 text-slate-800 hover:text-[#C51C1C] transition-colors"
           >
             <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm">
               <FaPhone className="text-lg" />
             </div>
-            <span className="font-semibold text-md">{contactInfo.phone}</span>
+            <span className="font-semibold text-md">{info.phone}</span>
           </a>
           <a 
-            href={`https://wa.me/${contactInfo.whatsapp.replace(/[^+\d]/g, '')}`} 
+            href={`https://wa.me/${info.whatsapp.replace(/[^+\d]/g, '')}`} 
             className="flex items-center gap-3 text-slate-800 hover:text-[#C51C1C] transition-colors"
           >
             <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm">
               <FaWhatsappSquare className="text-2xl text-[#25D366]" />
             </div>
-            <span className="font-semibold text-md">WhatsApp Us</span>
+            <span className="font-semibold text-md">{t.whatsappUs}</span>
           </a>
         </div>
 

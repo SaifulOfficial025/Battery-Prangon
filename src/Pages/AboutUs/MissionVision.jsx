@@ -1,43 +1,89 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Container from '../../Layout/Container/Container';
 import { Zap, Cpu, Globe, Car, Leaf } from 'lucide-react';
 
-function MissionVision() {
-  const missions = [
-    {
-      icon: Zap,
-      title: "শক্তির সহজলভ্যতা নিশ্চিত করা",
-      description: "বাংলাদেশের প্রতিটি মানুষ যেন সহজে ও কম খরচে উন্নত এনার্জি সলিউশন পায়।"
-    },
-    {
-      icon: Cpu,
-      title: "প্রযুক্তি পরিবর্তনের নেতৃত্ব দেওয়া",
-      description: "পুরাতন লিড-অ্যাসিড ব্যাটারির পরিবর্তে Lithium প্রযুক্তিকে জনপ্রিয় করা।"
-    },
-    {
-      icon: Globe,
-      title: "রিনিউয়েবল এনার্জি প্রসার",
-      description: "সোলার এনার্জি ব্যবহার বৃদ্ধি করে বিদ্যুৎ খরচ কমানো।"
-    },
-    {
-      icon: Car,
-      title: "EV ইন্ডাস্ট্রি উন্নয়ন",
-      description: "ইলেকট্রিক যানবাহনের জন্য শক্তিশালী ব্যাটারি সাপোর্ট তৈরি করা।"
-    },
-    {
-      icon: Leaf,
-      title: "পরিবেশ রক্ষা",
-      description: "কার্বন নিঃসরণ কমিয়ে একটি সবুজ বাংলাদেশ গড়ন করা।"
-    }
-  ];
+const translations = {
+  en: {
+    missionHeading: "Our Mission",
+    visionHeading: "Our Vision",
+    missions: [
+      {
+        title: "Ensure Energy Availability",
+        description: "To provide advanced and affordable energy solutions to every citizen of Bangladesh."
+      },
+      {
+        title: "Lead Technological Transition",
+        description: "To popularize Lithium technology as an upgrade to traditional lead-acid batteries."
+      },
+      {
+        title: "Expand Renewable Energy",
+        description: "To reduce electricity costs by increasing the utilization of solar energy."
+      },
+      {
+        title: "Develop EV Industry",
+        description: "To build high-performance battery systems for electric vehicles."
+      },
+      {
+        title: "Protect Environment",
+        description: "To foster a green Bangladesh by reducing carbon emissions."
+      }
+    ],
+    visions: [
+      { num: "1", text: "Become the leading Energy Storage Company in South Asia" },
+      { num: "2", text: "Build a comprehensive Smart Energy Ecosystem" },
+      { num: "3", text: "100% Renewable Energy Adoption" },
+      { num: "4", text: "Develop a Green & Sustainable Bangladesh" },
+      { num: "5", text: "Establish Bangladesh as a Battery Technology Hub" }
+    ]
+  },
+  bn: {
+    missionHeading: "আমাদের মিশন",
+    visionHeading: "আমাদের ভিশন",
+    missions: [
+      {
+        title: "শক্তির সহজলভ্যতা নিশ্চিত করা",
+        description: "বাংলাদেশের প্রতিটি মানুষ যেন সহজে ও কম খরচে উন্নত এনার্জি সলিউশন পায়।"
+      },
+      {
+        title: "প্রযুক্তি পরিবর্তনের নেতৃত্ব দেওয়া",
+        description: "পুরাতন লিড-অ্যাসিড ব্যাটারির পরিবর্তে Lithium প্রযুক্তিকে জনপ্রিয় করা।"
+      },
+      {
+        title: "রিনিউয়েবল এনার্জি প্রসার",
+        description: "সোলার এনার্জি ব্যবহার বৃদ্ধি করে বিদ্যুৎ খরচ কমানো।"
+      },
+      {
+        title: "EV ইন্ডাস্ট্রি উন্নয়ন",
+        description: "ইলেকট্রিক যানবাহনের জন্য শক্তিশালী ব্যাটারি সাপোর্ট তৈরি করা।"
+      },
+      {
+        title: "পরিবেশ রক্ষা",
+        description: "কার্বন নিঃসরণ কমিয়ে একটি সবুজ বাংলাদেশ গড়ন করা।"
+      }
+    ],
+    visions: [
+      { num: "১", text: "দক্ষিণ এশিয়ার শীর্ষ Energy Storage Company হওয়া" },
+      { num: "২", text: "সম্পূর্ণ Smart Energy Ecosystem তৈরি করা" },
+      { num: "৩", text: "১০০% Renewable Energy Adoption" },
+      { num: "৪", text: "একটি Green & Sustainable Bangladesh গড়ন" },
+      { num: "৫", text: "বাংলাদেশকে Battery Technology Hub হিসেবে প্রতিষ্ঠা করা" }
+    ]
+  }
+};
 
-  const visions = [
-    { num: "1", text: "দক্ষিণ এশিয়ার শীর্ষ Energy Storage Company হওয়া" },
-    { num: "2", text: "সম্পূর্ণ Smart Energy Ecosystem তৈরি করা" },
-    { num: "3", text: "১০০% Renewable Energy Adoption" },
-    { num: "4", text: "একটি Green & Sustainable Bangladesh গড়ন" },
-    { num: "5", text: "বাংলাদেশকে Battery Technology Hub হিসেবে প্রতিষ্ঠা করা" }
-  ];
+const icons = [Zap, Cpu, Globe, Car, Leaf];
+
+function MissionVision() {
+  const lang = useSelector((state) => state.lang.lang);
+  const t = translations[lang] || translations.en;
+
+  const missions = t.missions.map((mission, index) => ({
+    ...mission,
+    icon: icons[index] || Zap
+  }));
+
+  const visions = t.visions;
 
   return (
     <div className="w-full bg-white text-slate-800 py-12 md:py-16 flex flex-col gap-16 md:gap-24">
@@ -46,8 +92,8 @@ function MissionVision() {
         <div className="flex flex-col gap-8 md:gap-12">
           <div className="flex items-center gap-3">
             <div className="w-6 h-[5px] bg-[#C51C1C] rounded-sm"></div>
-            <h2 className="text-2xl md:text-3xl font-bold font-serif text-slate-900">
-              আমাদের মিশন
+            <h2 className="text-2xl md:text-3xl font-semibold font-serif text-slate-900">
+              {t.missionHeading}
             </h2>
           </div>
 
@@ -65,7 +111,7 @@ function MissionVision() {
                   </div>
                   
                   {/* Card Title */}
-                  <h3 className="text-slate-900 text-lg font-bold mb-2 transition-colors duration-300 group-hover:text-[#C51C1C] font-sans">
+                  <h3 className="text-slate-900 text-lg font-semibold mb-2 transition-colors duration-300 group-hover:text-[#C51C1C] font-sans">
                     {mission.title}
                   </h3>
                   
@@ -82,8 +128,8 @@ function MissionVision() {
         <div className="flex flex-col gap-8 md:gap-12 mt-28">
           <div className="flex items-center gap-3">
             <div className="w-6 h-[5px] bg-[#C51C1C] "></div>
-            <h2 className="text-2xl md:text-3xl font-bold font-serif text-slate-900">
-              আমাদের ভিশন
+            <h2 className="text-2xl md:text-3xl font-semi font-serif text-slate-900">
+              {t.visionHeading}
             </h2>
           </div>
 
@@ -93,8 +139,8 @@ function MissionVision() {
                 key={index}
                 className="group flex items-center gap-3 p-5 bg-white border border-gray-200/70 cursor-pointer transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_8px_16px_rgba(197,28,28,0.03)] hover:border-[#C51C1C]/30"
               >
-                <div className="flex items-center gap-2 font-sans font-medium text-slate-700 text-sm md:text-base">
-                  <span className="font-bold text-slate-900 mr-1 group-hover:text-[#C51C1C] transition-colors duration-300">
+                <div className="flex items-center gap-2 font-sans font-medium text-slate-900 text-sm md:text-base">
+                  <span className="font-semibold text-slate-900 mr-1 group-hover:text-[#C51C1C] transition-colors duration-300">
                     {vision.num}.
                   </span>
                   <span className="group-hover:text-slate-900 transition-colors duration-300">
@@ -106,8 +152,6 @@ function MissionVision() {
           </div>
         </div>
       </Container>
-
-  
     </div>
   );
 }

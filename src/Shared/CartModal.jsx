@@ -1,10 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { IoClose } from 'react-icons/io5';
 import Button from './Button';
 
+const translations = {
+  en: {
+    cartTitle: 'Your Cart',
+    closeCart: 'Close cart',
+    emptyCart: 'Your cart is empty',
+    decreaseQty: 'Decrease quantity',
+    increaseQty: 'Increase quantity',
+    remove: 'Remove',
+    subtotal: 'Subtotal',
+    checkOut: 'Check Out'
+  },
+  bn: {
+    cartTitle: 'আপনার কার্ট',
+    closeCart: 'কার্ট বন্ধ করুন',
+    emptyCart: 'আপনার কার্ট খালি',
+    decreaseQty: 'পরিমাণ কমান',
+    increaseQty: 'পরিমাণ বাড়ান',
+    remove: 'মুছুন',
+    subtotal: 'সাবটোটাল',
+    checkOut: 'চেক আউট'
+  }
+};
+
 function CartModal({ isOpen = true, onClose }) {
   const navigate = useNavigate();
+  const lang = useSelector((state) => state.lang.lang);
+  const t = translations[lang] || translations.en;
+
   const [cartItems, setCartItems] = useState([
     {
       id: 1,
@@ -59,6 +86,19 @@ function CartModal({ isOpen = true, onClose }) {
     setCartItems(prevItems => prevItems.filter(item => item.id !== id));
   };
 
+  // Format price helper with Taka sign and Bengali digits support
+  const formatPrice = (amount) => {
+    const formatted = amount.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+    if (lang === 'bn') {
+      const bnDigits = {
+        '0': '০', '1': '১', '2': '২', '3': '৩', '4': '৪',
+        '5': '৫', '6': '৬', '7': '৭', '8': '৮', '9': '৯'
+      };
+      return '৳' + formatted.split('').map(char => bnDigits[char] || char).join('');
+    }
+    return '৳' + formatted;
+  };
+
   // Calculate Subtotal dynamically based on actual cart items
   const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
@@ -75,12 +115,12 @@ function CartModal({ isOpen = true, onClose }) {
         
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-100">
-          <h2 className="text-xl font-semibold text-slate-900 font-sans">Your Cart</h2>
+          <h2 className="text-xl font-semibold text-slate-900 font-sans">{t.cartTitle}</h2>
           <button 
             type="button" 
             onClick={onClose}
             className="text-2xl text-slate-800 hover:text-black transition-colors duration-200 p-1"
-            aria-label="Close cart"
+            aria-label={t.closeCart}
           >
             <IoClose />
           </button>
@@ -90,7 +130,7 @@ function CartModal({ isOpen = true, onClose }) {
         <div className="flex-grow overflow-y-auto p-6 flex flex-col gap-4">
           {cartItems.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full text-slate-400 py-12">
-              <span className="text-lg font-medium">Your cart is empty</span>
+              <span className="text-lg font-medium">{t.emptyCart}</span>
             </div>
           ) : (
             cartItems.map((item) => (
@@ -117,10 +157,10 @@ function CartModal({ isOpen = true, onClose }) {
                     {/* Prices */}
                     <div className="flex items-center gap-3 mt-1.5">
                       <span className="text-sm text-slate-400 line-through">
-                        ${item.originalPrice}
+                        {formatPrice(item.originalPrice)}
                       </span>
                       <span className="text-sm font-semibold text-slate-900">
-                        ${item.price}
+                        {formatPrice(item.price)}
                       </span>
                     </div>
                   </div>
@@ -133,18 +173,24 @@ function CartModal({ isOpen = true, onClose }) {
                         type="button" 
                         onClick={() => updateQuantity(item.id, -1)}
                         className="w-8 h-full flex items-center justify-center hover:bg-gray-50 active:bg-gray-100 transition-colors"
-                        aria-label="Decrease quantity"
+                        aria-label={t.decreaseQty}
                       >
                         -
                       </button>
                       <span className="w-8 text-center font-medium border-x border-gray-200 h-full flex items-center justify-center">
-                        {item.quantity}
+                        {lang === 'bn' 
+                          ? item.quantity.toString().split('').map(c => ({
+                              '0': '০', '1': '১', '2': '২', '3': '৩', '4': '৪',
+                              '5': '৫', '6': '৬', '7': '৭', '8': '৮', '9': '৯'
+                            })[c] || c).join('')
+                          : item.quantity
+                        }
                       </span>
                       <button 
                         type="button" 
                         onClick={() => updateQuantity(item.id, 1)}
                         className="w-8 h-full flex items-center justify-center hover:bg-gray-50 active:bg-gray-100 transition-colors"
-                        aria-label="Increase quantity"
+                        aria-label={t.increaseQty}
                       >
                         +
                       </button>
@@ -156,7 +202,7 @@ function CartModal({ isOpen = true, onClose }) {
                       onClick={() => removeItem(item.id)}
                       className="text-xs font-semibold text-slate-500 hover:text-[#C51C1C] underline transition-colors"
                     >
-                      Remove
+                      {t.remove}
                     </button>
                   </div>
                 </div>
@@ -169,9 +215,9 @@ function CartModal({ isOpen = true, onClose }) {
         {cartItems.length > 0 && (
           <div className="border-t border-gray-100 p-6 bg-white">
             <div className="flex items-center justify-between mb-6">
-              <span className="text-base font-semibold text-slate-900">Subtotal</span>
+              <span className="text-base font-semibold text-slate-900">{t.subtotal}</span>
               <span className="text-base font-semibold text-slate-900">
-                ${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                {formatPrice(subtotal)}
               </span>
             </div>
             
@@ -183,7 +229,7 @@ function CartModal({ isOpen = true, onClose }) {
                 if (onClose) onClose();
               }}
             >
-              Check Out
+              {t.checkOut}
             </Button>
           </div>
         )}
