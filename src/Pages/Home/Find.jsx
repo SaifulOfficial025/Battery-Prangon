@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Container from '../../Layout/Container/Container';
 import { fetchCategories } from '../../Redux/Category';
+import { setFilters } from '../../Redux/Product/Products';
 
 // Fallback icon map (used when category has no image from API)
 const fallbackIcons = {
@@ -16,8 +18,14 @@ const translations = {
 
 function Find() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { categories, loading, error } = useSelector((state) => state.category);
   const lang = useSelector((state) => state.lang.lang);
+
+  const handleCategoryClick = (item) => {
+    dispatch(setFilters({ category: item.id }));
+    navigate('/products');
+  };
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -66,6 +74,7 @@ function Find() {
               return (
                 <div
                   key={item.id}
+                  onClick={() => handleCategoryClick(item)}
                   className="w-[145px] sm:w-[170px] md:w-[180px] lg:w-[190px] aspect-square flex flex-col items-center justify-center p-4 sm:p-6 border-r border-b border-gray-300 bg-white hover:bg-slate-50 transition-colors duration-200 text-center group cursor-pointer"
                 >
                   {/* Icon Container */}

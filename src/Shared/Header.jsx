@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Container from '../Layout/Container/Container';
 import { IoSearchOutline, IoMenu, IoClose } from "react-icons/io5";
 import { FaPhone } from "react-icons/fa6";
@@ -9,6 +9,7 @@ import { getContactInfo } from './ContactInfo';
 import CartModal from './CartModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleLang } from '../Redux/Lang';
+import { setFilters } from '../Redux/Product/Products';
 
 const translations = {
   en: {
@@ -48,10 +49,36 @@ const translations = {
 function Header() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [searchInput, setSearchInput] = useState('');
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
   const lang = useSelector((state) => state.lang.lang);
   const info = getContactInfo(lang);
   const t = translations[lang] || translations.en;
+
+  // Clear search input when leaving the products page
+  useEffect(() => {
+    if (!location.pathname.startsWith('/products')) {
+      setSearchInput('');
+      dispatch(setFilters({ search: null }));
+    }
+  }, [location.pathname, dispatch]);
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    const trimmed = searchInput.trim();
+    dispatch(setFilters({ search: trimmed || null }));
+    if (!location.pathname.startsWith('/products')) {
+      navigate('/products');
+    }
+  };
+
+  const handleSearchKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleSearchSubmit(e);
+    }
+  };
 
   useEffect(() => {
     const handleOpenCart = () => setIsCartOpen(true);
@@ -96,22 +123,28 @@ function Header() {
           </nav>
 
           {/* Search Bar */}
-          <div className="w-full lg:w-auto flex-grow lg:max-w-[400px] order-last lg:order-none mx-0 lg:mx-2">
+          <form
+            onSubmit={handleSearchSubmit}
+            className="w-full lg:w-auto flex-grow lg:max-w-[400px] order-last lg:order-none mx-0 lg:mx-2"
+          >
             <div className="relative w-full">
               <input
                 type="text"
                 placeholder={t.searchPlaceholder}
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                onKeyDown={handleSearchKeyDown}
                 className="w-full bg-[#f1f1f1] text-slate-800 placeholder-slate-400 py-2.5 pl-6 pr-12 focus:outline-none focus:ring-1 focus:ring-red-600 text-sm font-normal"
               />
               <button 
-                type="button"
+                type="submit"
                 className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-600 hover:text-black transition-colors"
                 aria-label={t.searchAria}
               >
                 <IoSearchOutline className="text-xl" />
               </button>
             </div>
-          </div>
+          </form>
 
           {/* Contact Details & Circle Buttons */}
           <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
