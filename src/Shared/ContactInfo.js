@@ -1,7 +1,7 @@
 const sharedInfo = {
-  mail: "saifulofficial025@gmail.com",
+  mail: "powerixtechnology@gmail.com",
   facebook: " https://web.facebook.com/profile.php?id=61580985715573",
-  instagram: "https://instagram.com/",
+  // instagram: "https://instagram.com/",
   mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.3377284483785!2d90.39572527589137!3d23.877647279953934!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3757c5eb8e5c1d63%3A0x6e9f291079d8c0b9!2sSector-9%2C%20Uttara%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1718952000000!5m2!1sen!2sbd",
 };
 
@@ -11,7 +11,7 @@ const localizedInfo = {
     fullname: "Powerix Technology Ltd",
     phone: "01719-880755",
     phone2: "01352-078996",
-    whatsapp: "+8801719880755",
+    whatsapp: "https://wa.me/01719880755",
     address: "Road #7, House #22, Sector-9, Uttara, Dhaka-1230",
     addressLines: [
       "Road #7, House #22, Sector-9, Uttara",

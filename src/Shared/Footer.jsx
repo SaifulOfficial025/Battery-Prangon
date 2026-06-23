@@ -7,6 +7,7 @@ import { FaPhone } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
 import { getContactInfo } from './ContactInfo';
+import { ImWhatsapp } from "react-icons/im";
 
 const translations = {
   en: {
@@ -69,15 +70,15 @@ function Footer() {
             </p>
             {/* Social Icons */}
             <div className="flex items-center gap-3">
-              {/* Instagram Button */}
+              {/* Whatsapp Button */}
               <a 
-                href={info.instagram} 
+                href={info.whatsapp} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] flex items-center justify-center text-white text-xl hover:opacity-90 transition-opacity"
-                title="Instagram"
+                className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#25d366] via-[#25d366] to-[#25d366] flex items-center justify-center text-white text-xl hover:opacity-90 transition-opacity"
+                title="Whatsapp"
               >
-                <IoLogoInstagram />
+                <ImWhatsapp  />
               </a>
               {/* Facebook Button */}
               <a 
